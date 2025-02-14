@@ -17,11 +17,20 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <javafx.home>C:/path/to/javafx</javafx.home>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>21.0.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-base</artifactId>
+                <version>21.0.2</version>
+            </dependency>
             <dependency>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-controls</artifactId>
@@ -59,11 +68,26 @@
                 <configuration>
                     <executable>${java}</executable>
                     <workingDirectory>.</workingDirectory>
-                    <commandlineArgs>
-                        --module-path ${javafx.home}/lib;${project.build.directory}/modules
-                        --add-modules javafx.controls,javafx.graphics
-                        --module sdu.mmmi.sga.core/sdu.mmmi.sga.core.Main
-                    </commandlineArgs>
+                    <longModulepath>false</longModulepath>
+                    <arguments>
+                        <!--
+                                                On Mac Devices this line should not be commented out
+                                                <argument>-XstartOnFirstThread</argument>
+                        -->
+                        <argument>-Dorg.lwjgl.util.Debug=true</argument>
+                        <argument>-Djava.library.path=libs</argument>
+                        <argument>--module-path=mods-mvn</argument>
+                        <argument>--class-path=libs/*</argument>
+                        <!-- because spark.core is an automatic module and actually required,
+                        monitor.observer.zero would be resolved as well and does not need
+                        to be added explicitly;
+                        I still wanted to do it for clarity, but for some reason that results
+                        in "java.lang.module.FindException: Module monitor.observer.zero not found";
+                        strange... -->
+                        <!--                        <argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=127.0.0.1:8000</argument>-->
+                        <argument>--module=Core/dk.sdu.mmmi.sga.main.Main</argument>
+                        <argument>--add-modules javafx.graphics</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

@@ -3,15 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>dk.sdu.mmmi.smartgrid</groupId>
+        <artifactId>Smart-Grid-Apliances</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-    <groupId>dk.sdu.mmmi.smartgrid</groupId>
-    <artifactId>Smart-Grid-Appliance</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>BusinessLogic</module>
-        <module>Frontend</module>
-    </modules>
+    <groupId>Smart.Grid</groupId>
+    <artifactId>BusinessLogic</artifactId>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>

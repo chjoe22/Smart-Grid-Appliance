@@ -7,9 +7,10 @@
         <groupId>sdu.mmmi.sga</groupId>
         <artifactId>Smart-Grid-Appliance</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>backend</artifactId>
+    <artifactId>core</artifactId>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>

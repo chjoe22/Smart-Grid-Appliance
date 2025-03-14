@@ -1,15 +1,21 @@
-import React, {useEffect, useState} from "react";
-import {getExampleData} from "./api";
+import React, {useEffect, useState} from 'react'
+import {getExampleData} from "./api"
 
-
-    const exampleData = () => {
-        const [data, setData] = useState(null);
+function Example() {
+        const [data, setData] = useState(null)
 
         useEffect(() => {
             const fetchData = async () => {
                 try {
+                    // Fetch data from the API
                     const data = await getExampleData();
-                    setData(data);
+                    // Example of how to extract only the fields you need
+                    const filteredData = data.map(item => ({
+                        firstname: item.firstname,
+                        lastname: item.lastname,
+                    }));
+                    // Set the data to the state, change filteredData to data to see all fields
+                    setData(filteredData);
                 } catch (error) {
                     console.error('Error fetching data: ', error);
                 }
@@ -21,7 +27,7 @@ import {getExampleData} from "./api";
                 {data ? (
                     <div>
                         <h2>Example Data</h2>
-                        <pre>{JSON.stringify(data, null, 2)}</pre>
+                        <pre>{JSON.stringify(data, null, 1)}</pre>
                     </div>
                 ) : (
                     <p>Loading...</p>
@@ -30,4 +36,4 @@ import {getExampleData} from "./api";
         )
     }
 
-export default exampleData();
+export default Example;

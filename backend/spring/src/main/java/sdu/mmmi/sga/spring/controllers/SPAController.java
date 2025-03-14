@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SPAController {
 
     @GetMapping(value = "/{path:[^\\.]*}")
-    public String redirect() {
+    public String forward() {
         return "forward:/";
     }
 }

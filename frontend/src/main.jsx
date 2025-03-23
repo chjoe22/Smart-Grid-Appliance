@@ -2,11 +2,13 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import Example from "./example.jsx";
+import NameExample from "./example.jsx";
+import MUI from "./MUI.jsx";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <Example />
-    <App />
+      <MUI />
+      <NameExample />
+      <App />
   </StrictMode>,
 )

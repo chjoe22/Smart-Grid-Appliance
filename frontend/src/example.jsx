@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {getExampleData} from "./api"
 
-function Example() {
+function NameExample() {
         const [data, setData] = useState(null)
 
         useEffect(() => {
@@ -36,4 +36,4 @@ function Example() {
         )
     }
 
-export default Example;
+export default NameExample;

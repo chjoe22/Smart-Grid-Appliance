@@ -1,4 +1,4 @@
-module spring {
+module dk.sdu.mmmi.sga.spring {
     requires spring.boot;
     requires spring.boot.autoconfigure;
     requires spring.context;

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GreenhouseDBReader {
-    private final String url = "jdbc:derby:GreenhouseDB;create=false";
+    private final String url = "jdbc:derby:GreenhouseDB;create=true";
     private final String user = "user1";
     private final String pass = "user1";
 
@@ -37,6 +37,7 @@ public class GreenhouseDBReader {
     }
 
     public static void main(String[] args) {
+
         GreenhouseDBReader reader = new GreenhouseDBReader();
         List<AirTemperature> results = reader.readAirTemperature();
         results.forEach(System.out::println);

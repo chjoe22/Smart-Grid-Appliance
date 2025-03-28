@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>backend/dk.sdu.mmmi.sga.spring</module>
+        <module>backend/dk.sdu.mmmi.sga.greenhouseDB</module>
     </modules>
 
     <properties>

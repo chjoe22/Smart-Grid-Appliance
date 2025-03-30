@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GreenhouseDBReader {
-    private final String url = "jdbc:derby:GreenhouseDB;create=true";
+    private final String url = "jdbc:derby:C:/Users/Vandp/Desktop/Universitet/GreenhouseDB;create=false";
     private final String user = "user1";
     private final String pass = "user1";
 
@@ -23,7 +23,7 @@ public class GreenhouseDBReader {
             while (rs.next()) {
                 int id = rs.getInt("ID");
                 int contextId = rs.getInt("CONTEXT_ID");
-                Timestamp timestamp = rs.getTimestamp("TIMESTAMP");
+                Timestamp timestamp = rs.getTimestamp("TIME");
                 double celsius = rs.getDouble("CELCIUS");
 
                 airTemperatureList.add(new AirTemperature(id, contextId, timestamp, celsius));

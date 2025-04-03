@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GreenhouseDBReader {
+    // for now, should use the absolute path to where you have the database loacated
+    // The database should be made remote so we can use a localhost connection preferably localhost:1557 if correct
     private final String url = "jdbc:derby:C:/Users/Vandp/Desktop/Universitet/GreenhouseDB;create=false";
     private final String user = "user1";
     private final String pass = "user1";

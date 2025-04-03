@@ -9,8 +9,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>backend/dk.sdu.mmmi.sga.spring</module>
-        <module>backend/dk.sdu.mmmi.sga.greenhouseDB</module>
+        <module>Backend/dk.sdu.mmmi.sga.spring</module>
+        <module>Backend/dk.sdu.mmmi.sga.greenhouseDB</module>
+        <module>Backend/dk.sdu.mmmi.sga.core</module>
     </modules>
 
     <properties>

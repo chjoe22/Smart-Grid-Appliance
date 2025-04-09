@@ -1,12 +1,15 @@
 package dk.sdu.mmmi.sga.database.reader;
 
-import dk.sdu.mmmi.sga.database.model.AirTemperature;
+import dk.sdu.mmmi.sga.core.services.DataCollection;
+import dk.sdu.mmmi.sga.core.services.IDBPackages;
+import dk.sdu.mmmi.sga.database.models.AirTemperature;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GreenhouseDBReader {
+public class GreenhouseDBReader implements IDBPackages {
+
     // for now, should use the absolute path to where you have the database loacated
     // The database should be made remote so we can use a localhost connection preferably localhost:1557 if correct
     private final String url = "jdbc:derby:C:/Users/Vandp/Desktop/Universitet/GreenhouseDB;create=false";
@@ -43,5 +46,10 @@ public class GreenhouseDBReader {
         GreenhouseDBReader reader = new GreenhouseDBReader();
         List<AirTemperature> results = reader.readAirTemperature();
         results.forEach(System.out::println);
+    }
+
+    @Override
+    public List<DataCollection> collectData() {
+        return List.of();
     }
 }

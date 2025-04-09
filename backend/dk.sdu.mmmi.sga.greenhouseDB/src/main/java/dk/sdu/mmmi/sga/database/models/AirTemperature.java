@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.sga.database.model;
+package dk.sdu.mmmi.sga.database.models;
 
 import java.sql.Timestamp;
 

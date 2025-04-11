@@ -3,10 +3,9 @@ import LoginSignUp from "./components/LoginSignUp/LoginSignUp.jsx";
 export default App
 import React, { useState } from 'react'
 import reactLogo from './components/assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Example from "./example.jsx";
-import SignUp from './pages/SignUp.jsx';
+import SidebarApp from "./components/Sidebar/SidebarApp.jsx";
 
 function App() {
     const [count, setCount] = useState(0)
@@ -15,7 +14,6 @@ function App() {
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
@@ -32,6 +30,7 @@ function App() {
       </div>
         <div>
             <LoginSignUp />
+            <SidebarApp />
         </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more

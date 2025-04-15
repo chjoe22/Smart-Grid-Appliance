@@ -1,4 +1,4 @@
-package sdu.mmmi.sga.spring.controllers.api.v1;
+package dk.sdu.mmmi.sga.spring.controllers.api.v1;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

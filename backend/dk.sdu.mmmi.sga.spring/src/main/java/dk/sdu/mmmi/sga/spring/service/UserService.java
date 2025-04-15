@@ -1,6 +1,6 @@
-package sdu.mmmi.sga.spring.service;
+package dk.sdu.mmmi.sga.spring.service;
 
-import sdu.mmmi.sga.spring.data.User;
+import dk.sdu.mmmi.sga.spring.data.User;
 
 import java.util.Arrays;
 import java.util.List;

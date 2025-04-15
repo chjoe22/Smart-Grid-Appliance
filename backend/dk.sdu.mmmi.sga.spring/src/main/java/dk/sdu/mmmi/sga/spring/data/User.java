@@ -1,4 +1,4 @@
-package sdu.mmmi.sga.spring.data;
+package dk.sdu.mmmi.sga.spring.data;
 
 
 // This is a test class to simulate a user object

@@ -1,55 +1,47 @@
 package dk.sdu.mmmi.sga.database.reader;
 
-import dk.sdu.mmmi.sga.core.services.DataCollection;
-import dk.sdu.mmmi.sga.core.services.IDBPackages;
-import dk.sdu.mmmi.sga.database.models.AirTemperature;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class GreenhouseDBReader implements IDBPackages {
+public class GreenhouseDBReader {
 
-    // for now, should use the absolute path to where you have the database loacated
-    // The database should be made remote so we can use a localhost connection preferably localhost:1557 if correct
     private final String url = "jdbc:derby:C:/Users/Vandp/Desktop/Universitet/GreenhouseDB;create=false";
     private final String user = "user1";
     private final String pass = "user1";
 
-
-    public List<AirTemperature> readAirTemperature() {
-        List<AirTemperature> airTemperatureList = new ArrayList<>();
-        String query = "SELECT * FROM APP.AIR_TEMPERATURE";
+    public List<Map<String, Object>> fetchData(String tableName) {
+        List<Map<String, Object>> results = new ArrayList<>();
+        String query = "SELECT * FROM APP." + tableName + " ORDER BY TIME ASC FETCH FIRST 100 ROWS ONLY";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
-            while (rs.next()) {
-                int id = rs.getInt("ID");
-                int contextId = rs.getInt("CONTEXT_ID");
-                Timestamp timestamp = rs.getTimestamp("TIME");
-                double celsius = rs.getDouble("CELCIUS");
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
 
-                airTemperatureList.add(new AirTemperature(id, contextId, timestamp, celsius));
+            while (rs.next()) {
+                Map<String, Object> row = new HashMap<>();
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnName = metaData.getColumnName(i);
+                    Object value = rs.getObject(i);
+                    row.put(columnName, value);
+                }
+                results.add(row);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return airTemperatureList;
+        return results;
     }
 
     public static void main(String[] args) {
-
-        GreenhouseDBReader reader = new GreenhouseDBReader();
-        List<AirTemperature> results = reader.readAirTemperature();
-        results.forEach(System.out::println);
-    }
-
-    @Override
-    public List<DataCollection> collectData() {
-        return List.of();
+        GreenhouseDBReader collector = new GreenhouseDBReader();
+        List<Map<String, Object>> data = collector.fetchData("AIR_TEMPERATURE");
+        data.forEach(System.out::println);
+        data = collector.fetchData("HUMIDITY");
+        data.forEach(System.out::println);
     }
 }

@@ -1,7 +1,7 @@
 package dk.sdu.mmmi.sga.database.collectors;
 
 import dk.sdu.mmmi.sga.core.services.DataCollection;
-import dk.sdu.mmmi.sga.database.models.AirTemperature;
+import dk.sdu.mmmi.sga.database.models.Humidity;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
 
 import java.sql.ResultSet;
@@ -9,32 +9,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirTempCollector extends DatabaseConnection implements DataCollection<AirTemperature> {
+public class HumidityCollector extends DatabaseConnection implements DataCollection<Humidity> {
 
     private int i = 1;
-    public AirTempCollector() {
+    public HumidityCollector() {
         super();
     }
 
     @Override
     public String getName() {
-        return "AirTemp";
+        return "Humidity";
     }
 
     @Override
-    public List<AirTemperature> collect() {
-        List<AirTemperature> results = new ArrayList<>();
-        try (ResultSet rs = queryExecution("SELECT * FROM APP.AIR_TEMPERATURE ORDER BY TIME ASC FETCH FIRST "+i+" ROWS ONLY")) {
-            while (rs.next()) {
-                results.add(new AirTemperature(
+    public List<Humidity> collect() {
+        List<Humidity> results = new ArrayList<>();
+        try(ResultSet rs = queryExecution("SELECT * FROM APP.HUMIDITY ORDER BY TIME ASC FETCH FIRST "+i+" ROWS ONLY")) {
+            while (rs.next()){
+                results.add(new Humidity(
                         rs.getInt("ID"),
                         rs.getInt("CONTEXT_ID"),
                         rs.getTimestamp("TIME"),
-                        rs.getDouble("CELCIUS")
+                        rs.getDouble("FACTOR")
                 ));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlE){
+            sqlE.printStackTrace();
         }
         i++;
         if (i > 100) i--;

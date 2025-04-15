@@ -1,9 +1,11 @@
-package sdu.mmmi.sga.spring;
+package dk.sdu.mmmi.sga.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class Application {
 
     // use ./mvnw spring-boot:run to run the spring application

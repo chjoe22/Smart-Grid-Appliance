@@ -1,10 +1,10 @@
-package sdu.mmmi.sga.spring.controllers;
+package dk.sdu.mmmi.sga.spring.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sdu.mmmi.sga.spring.service.DataCollectorService;
+import dk.sdu.mmmi.sga.spring.service.DataCollectorService;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +25,6 @@ public class DataCollectorController {
 
     @GetMapping("/{collectorName}")
     public List<?> getDataCollection(@PathVariable String collectorName) {
-        return dataCollectorService.getDataCollection(collectorName);
+        return dataCollectorService.getDataCollection(collectorName).stream().limit(5).toList();
     }
 }

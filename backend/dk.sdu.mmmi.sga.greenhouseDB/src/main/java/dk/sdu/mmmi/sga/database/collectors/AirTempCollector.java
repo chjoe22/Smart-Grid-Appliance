@@ -18,7 +18,7 @@ public class AirTempCollector extends DatabaseConnection implements DataCollecti
 
     @Override
     public String getName() {
-        return "AirTemp";
+        return "Air Temperature";
     }
 
     @Override
@@ -39,9 +39,5 @@ public class AirTempCollector extends DatabaseConnection implements DataCollecti
         i++;
         if (i > 100) i--;
         return results;
-    }
-
-    @Override
-    public void close() {
     }
 }

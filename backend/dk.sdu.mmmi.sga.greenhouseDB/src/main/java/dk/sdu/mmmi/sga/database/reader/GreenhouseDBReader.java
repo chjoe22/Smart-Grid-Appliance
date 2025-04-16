@@ -5,7 +5,7 @@ import java.util.*;
 
 public class GreenhouseDBReader {
 
-    private final String url = "jdbc:derby:C:/Users/Vandp/Desktop/Universitet/GreenhouseDB;create=false";
+    private final String url = "jdbc:derby://localhost:1527/GreenhouseDB;create=false";
     private final String user = "user1";
     private final String pass = "user1";
 

@@ -15,7 +15,6 @@ public class OutDoorLightCollector extends DatabaseConnection implements DataCol
 
     @Override
     public List<Map<String, Object>> collect() {
-        GreenhouseDBReader reader = new GreenhouseDBReader();
-        return reader.fetchData("OUTDOOR_LIGHT");
+        return fetchData("OUTDOOR_LIGHT");
     }
 }

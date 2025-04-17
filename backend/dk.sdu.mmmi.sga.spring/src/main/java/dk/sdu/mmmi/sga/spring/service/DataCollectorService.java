@@ -23,7 +23,7 @@ public class DataCollectorService {
             System.out.println("No services loaded.");
         }
     }
-    @Scheduled(fixedRate = 100)
+    @Scheduled(fixedRate = 100000)
     public void refreshData(){
         System.out.println("Refreshing data...");
         runCollectors();

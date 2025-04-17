@@ -9,8 +9,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>backend</module>
-        <module>backend/spring</module>
+        <module>backend/dk.sdu.mmmi.sga.spring</module>
+        <module>backend/dk.sdu.mmmi.sga.greenhouseDB</module>
+        <module>backend/dk.sdu.mmmi.sga.core</module>
     </modules>
 
     <properties>
@@ -19,4 +20,5 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
 </project>

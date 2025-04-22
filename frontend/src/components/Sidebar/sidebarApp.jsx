@@ -1,8 +1,8 @@
 import {Button, Layout, theme} from "antd";
-import Logo from "/Users/MadsSigsgaard/IdeaProjects/Smart-Grid-Appliance/Frontend/src/components/Logo.jsx";
-import MenuList from "/Users/MadsSigsgaard/IdeaProjects/Smart-Grid-Appliance/Frontend/src/components/Sidebar/MenuList.jsx";
+import Logo from "../Logo.jsx";
+import MenuList from "./MenuList.jsx";
 import {useState} from "react";
-import ToggleThemeButton from "/Users/MadsSigsgaard/IdeaProjects/Smart-Grid-Appliance/Frontend/src/components/Sidebar/ToggleThemeButton.jsx";
+import ToggleThemeButton from "./ToggleThemeButton.jsx";
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
 
 const {Header, Sider} = Layout;

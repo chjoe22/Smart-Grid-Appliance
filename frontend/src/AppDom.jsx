@@ -1,19 +1,18 @@
 // src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainLayoutDom from "./MainLayoutDom";
+import MainLayout from "./MainLayoutDom";
+import HomePage from "./pages/HomePage";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp.jsx";
-import MainPage from "./components/MainPage/MainPage.jsx";
-import HomePage from "./pages/HomePage.jsx";
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<MainLayoutDom />}>
+                <Route path="/" element={<MainLayout />}>
                     <Route index element={<HomePage />} />
-                    <Route path="main" element={<MainPage />} />
+                    <Route path={"login"} element={<LoginSignUp/> }/>
+                    {/* Add more pages here */}
                 </Route>
-                <Route path="/login" element={<LoginSignUp />} />
             </Routes>
         </BrowserRouter>
     );

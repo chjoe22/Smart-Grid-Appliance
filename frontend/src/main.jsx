@@ -6,7 +6,6 @@ import Example from "./example.jsx";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <Example />
     <App/>
   </StrictMode>,
 )

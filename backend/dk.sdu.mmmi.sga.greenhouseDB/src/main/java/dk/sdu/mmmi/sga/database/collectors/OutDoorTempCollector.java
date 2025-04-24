@@ -1,39 +1,38 @@
 package dk.sdu.mmmi.sga.database.collectors;
 
-import dk.sdu.mmmi.sga.core.dto.AirTemperatureDTO;
+import dk.sdu.mmmi.sga.core.dto.OutDoorTemperatureDTO;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirTempCollector extends DatabaseConnection implements DataCollection<AirTemperatureDTO> {
+public class OutDoorTempCollector extends DatabaseConnection implements DataCollection<OutDoorTemperatureDTO> {
 
-    public AirTempCollector() {
+    public OutDoorTempCollector() {
         super();
     }
 
     @Override
     public String getName() {
-        return "Air Temperature";
+        return "OutDoorTemperature";
     }
 
     @Override
-    public List<AirTemperatureDTO> collect() {
-        List<AirTemperatureDTO> results = new ArrayList<>();
-        try (ResultSet rs = queryExecution("AIR_TEMPERATURE")) {
+    public List<OutDoorTemperatureDTO> collect() {
+        List<OutDoorTemperatureDTO> results = new ArrayList<>();
+        try (ResultSet rs = queryExecution("OUTDOOR_TEMPERATURE")){
             while (rs.next()) {
-                AirTemperatureDTO airTempDTO = new AirTemperatureDTO(
+                OutDoorTemperatureDTO outDoorTemperatureDTO = new OutDoorTemperatureDTO(
                         rs.getInt("ID"),
                         rs.getInt("CONTEXT_ID"),
                         rs.getTimestamp("TIME"),
                         rs.getDouble("CELCIUS")
                 );
-                results.add(airTempDTO);
+                results.add(outDoorTemperatureDTO);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return results;

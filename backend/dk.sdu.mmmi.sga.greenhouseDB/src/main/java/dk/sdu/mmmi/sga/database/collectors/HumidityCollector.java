@@ -1,7 +1,7 @@
 package dk.sdu.mmmi.sga.database.collectors;
 
+import dk.sdu.mmmi.sga.core.dto.HumidityDTO;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
-import dk.sdu.mmmi.sga.database.models.Humidity;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
 
 import java.sql.ResultSet;
@@ -9,9 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HumidityCollector extends DatabaseConnection implements DataCollection<Humidity> {
-
-    private int i = 1;
+public class HumidityCollector extends DatabaseConnection implements DataCollection<HumidityDTO> {
     public HumidityCollector() {
         super();
     }
@@ -22,26 +20,21 @@ public class HumidityCollector extends DatabaseConnection implements DataCollect
     }
 
     @Override
-    public List<Humidity> collect() {
-        List<Humidity> results = new ArrayList<>();
-        try(ResultSet rs = queryExecution("SELECT * FROM APP.HUMIDITY ORDER BY TIME ASC FETCH FIRST "+i+" ROWS ONLY")) {
-            while (rs.next()){
-                results.add(new Humidity(
-                        rs.getInt("ID"),
-                        rs.getInt("CONTEXT_ID"),
-                        rs.getTimestamp("TIME"),
-                        rs.getDouble("FACTOR")
-                ));
-            }
-        } catch (SQLException sqlE){
-            sqlE.printStackTrace();
+    public List<HumidityDTO> collect() {
+        List<HumidityDTO> results = new ArrayList<>();
+        try (ResultSet rs = queryExecution("HUMIDITY")) {
+                while (rs.next()) {
+                    HumidityDTO humidityDTO = new HumidityDTO(
+                            rs.getInt("ID"),
+                            rs.getInt("CONTEXT_ID"),
+                            rs.getTimestamp("TIME"),
+                            rs.getDouble("FACTOR")
+                    );
+                    results.add(humidityDTO);
+                }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        i++;
-        if (i > 100) i--;
         return results;
-    }
-
-    @Override
-    public void close() {
     }
 }

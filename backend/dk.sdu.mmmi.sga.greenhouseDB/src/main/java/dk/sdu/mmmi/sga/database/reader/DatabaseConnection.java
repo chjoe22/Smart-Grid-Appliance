@@ -61,8 +61,10 @@ public abstract class DatabaseConnection {
         return results;
     }
 
-    protected ResultSet queryExecution(String query) throws SQLException {
+    protected ResultSet queryExecution(String tableName) throws SQLException {
         Statement stmt = connection.createStatement();
-        return stmt.executeQuery(query);
+        String queryString = "SELECT * FROM APP."+ tableName +" ORDER BY TIME ASC FETCH FIRST "+i+" ROWS ONLY";
+        i = Math.min(i + 1, 100);
+        return stmt.executeQuery(queryString);
     }
 }

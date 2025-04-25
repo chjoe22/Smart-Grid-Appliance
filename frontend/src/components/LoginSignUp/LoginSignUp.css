@@ -6,7 +6,7 @@
     width: 600px;
     background: #78b336;
     padding-bottom: 30px;
-    border-radius: 12px; /* Optional: looks nicer */
+    border-radius: 12px;
 }
 
 
@@ -105,4 +105,19 @@
     align-items: center;
     height: 100vh;
     color: #78b336;
+}
+
+.submitButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 480px;
+    height: 59px;
+    color: #fff;
+    background: #3A4A9C;
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 1px auto 0 auto;
 }

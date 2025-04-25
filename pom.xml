@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>backend/dk.sdu.mmmi.sga.spring</module>
+        <module>backend/dk.sdu.mmmi.sga.web-api</module>
         <module>backend/dk.sdu.mmmi.sga.greenhouseDB</module>
         <module>backend/dk.sdu.mmmi.sga.core</module>
     </modules>
@@ -20,5 +20,13 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/>
+    </parent>
+
 
 </project>

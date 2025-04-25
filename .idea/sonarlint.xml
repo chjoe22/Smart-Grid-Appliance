@@ -4,6 +4,7 @@
     <option name="moduleMapping">
       <map>
         <entry key="dk.sdu.mmmi.sga.spring" value="spring" />
+        <entry key="web-api" value="spring" />
       </map>
     </option>
   </component>

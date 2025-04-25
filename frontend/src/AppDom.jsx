@@ -11,7 +11,6 @@ function App() {
                 <Route path="/" element={<MainLayout />}>
                     <Route index element={<HomePage />} />
                     <Route path={"login"} element={<LoginSignUp/> }/>
-                    {/* Add more pages here */}
                 </Route>
             </Routes>
         </BrowserRouter>

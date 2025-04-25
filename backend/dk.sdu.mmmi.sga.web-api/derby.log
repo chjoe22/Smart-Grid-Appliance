@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Fri Apr 25 11:56:15 CEST 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0196-6c60-55e4-000002eee3e0 
+Fri Apr 25 15:02:24 CEST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0196-6d0a-c4bc-0000030a7218 
 on database directory C:\Users\Vandp\Desktop\Universitet\GreenhouseDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
 Loaded from file:/C:/Users/Vandp/.m2/repository/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
 java.vendor=Eclipse Adoptium

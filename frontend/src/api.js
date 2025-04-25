@@ -6,7 +6,7 @@ const api = axios.create({
 
 export const getExampleData = async () => {
     try {
-        // Fetch data from the API and change the endpoint to match your API
+        // Fetch data from the API
         const response = await api.get('/data');
         return response.data;
     } catch (error) {

@@ -1,15 +1,17 @@
 package dk.sdu.mmmi.sga.database.collectors;
 
-import dk.sdu.mmmi.sga.core.dto.HumidityDTO;
+import dk.sdu.mmmi.sga.core.dto.Humidity;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HumidityCollector extends DatabaseConnection implements DataCollection<HumidityDTO> {
+@Component
+public class HumidityCollector extends DatabaseConnection implements DataCollection<Humidity> {
     public HumidityCollector() {
         super();
     }
@@ -20,11 +22,11 @@ public class HumidityCollector extends DatabaseConnection implements DataCollect
     }
 
     @Override
-    public List<HumidityDTO> collect() {
-        List<HumidityDTO> results = new ArrayList<>();
+    public List<Humidity> collect() {
+        List<Humidity> results = new ArrayList<>();
         try (ResultSet rs = queryExecution("HUMIDITY")) {
                 while (rs.next()) {
-                    HumidityDTO humidityDTO = new HumidityDTO(
+                    Humidity humidityDTO = new Humidity(
                             rs.getInt("ID"),
                             rs.getInt("CONTEXT_ID"),
                             rs.getTimestamp("TIME"),

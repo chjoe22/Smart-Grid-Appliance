@@ -1,14 +1,16 @@
 package dk.sdu.mmmi.sga.database.collectors;
 
-import dk.sdu.mmmi.sga.core.dto.MaxOutDoorLightDTO;
+import dk.sdu.mmmi.sga.core.dto.MaxOutDoorLight;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MaxOutDoorLightCollector extends DatabaseConnection implements DataCollection<MaxOutDoorLightDTO> {
+@Component
+public class MaxOutDoorLightCollector extends DatabaseConnection implements DataCollection<MaxOutDoorLight> {
 
     public MaxOutDoorLightCollector() {
         super();
@@ -20,11 +22,11 @@ public class MaxOutDoorLightCollector extends DatabaseConnection implements Data
     }
 
     @Override
-    public List<MaxOutDoorLightDTO> collect() {
-        List<MaxOutDoorLightDTO> results = new ArrayList<>();
+    public List<MaxOutDoorLight> collect() {
+        List<MaxOutDoorLight> results = new ArrayList<>();
         try (ResultSet rs = queryExecution("MAX_OUTDOOR_LIGHT")) {
             while (rs.next()) {
-                MaxOutDoorLightDTO maxOutDoorLightDTO = new MaxOutDoorLightDTO(
+                MaxOutDoorLight maxOutDoorLightDTO = new MaxOutDoorLight(
                         rs.getInt("ID"),
                         rs.getInt("CONTEXT_ID"),
                         rs.getTimestamp("TIME"),

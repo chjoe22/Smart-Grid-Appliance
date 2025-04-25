@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>sdu.mmmi.sga</groupId>
-    <artifactId>spring</artifactId>
+    <artifactId>web-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>dk.sdu.mmmi.sga.spring</name>
+    <name>dk.sdu.mmmi.sga.web</name>
     <description>spring</description>
     <url/>
     <licenses>
@@ -97,7 +97,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>dk.sdu.mmmi.sga.spring.Application</mainClass>
+                    <mainClass>dk.sdu.mmmi.sga.web.Application</mainClass>
                 </configuration>
             </plugin>
         </plugins>

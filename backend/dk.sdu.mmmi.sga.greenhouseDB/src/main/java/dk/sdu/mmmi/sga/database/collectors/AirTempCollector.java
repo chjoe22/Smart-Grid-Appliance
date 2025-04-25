@@ -1,15 +1,17 @@
 package dk.sdu.mmmi.sga.database.collectors;
 
-import dk.sdu.mmmi.sga.core.dto.AirTemperatureDTO;
+import dk.sdu.mmmi.sga.core.dto.AirTemperature;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirTempCollector extends DatabaseConnection implements DataCollection<AirTemperatureDTO> {
+@Component
+public class AirTempCollector extends DatabaseConnection implements DataCollection<AirTemperature> {
 
     public AirTempCollector() {
         super();
@@ -21,11 +23,11 @@ public class AirTempCollector extends DatabaseConnection implements DataCollecti
     }
 
     @Override
-    public List<AirTemperatureDTO> collect() {
-        List<AirTemperatureDTO> results = new ArrayList<>();
+    public List<AirTemperature> collect() {
+        List<AirTemperature> results = new ArrayList<>();
         try (ResultSet rs = queryExecution("AIR_TEMPERATURE")) {
             while (rs.next()) {
-                AirTemperatureDTO airTempDTO = new AirTemperatureDTO(
+                AirTemperature airTempDTO = new AirTemperature(
                         rs.getInt("ID"),
                         rs.getInt("CONTEXT_ID"),
                         rs.getTimestamp("TIME"),

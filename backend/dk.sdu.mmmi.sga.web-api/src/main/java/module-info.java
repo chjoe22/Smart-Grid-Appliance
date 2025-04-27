@@ -5,6 +5,10 @@ module web.api {
     requires spring.boot.autoconfigure;
     requires spring.context;
     requires spring.web;
+    requires spring.core;
+    requires spring.beans;
     uses dk.sdu.mmmi.sga.core.services.DataCollection;
-    opens dk.sdu.mmmi.sga.web;
+    opens dk.sdu.mmmi.sga.web to spring.core, spring.beans, spring.context;
+    opens dk.sdu.mmmi.sga.web.controllers to spring.core, spring.beans, spring.context;
+    opens dk.sdu.mmmi.sga.web.service to spring.core, spring.beans, spring.context;
 }

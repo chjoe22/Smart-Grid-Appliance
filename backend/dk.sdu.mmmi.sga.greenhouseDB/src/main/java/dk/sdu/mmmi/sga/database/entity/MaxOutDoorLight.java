@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.sga.core.dto;
+package dk.sdu.mmmi.sga.database.entity;
 
 
 import java.sql.Timestamp;

@@ -1,6 +1,6 @@
-package dk.sdu.mmmi.sga.database.collectors;
+package dk.sdu.mmmi.sga.database.usecase;
 
-import dk.sdu.mmmi.sga.core.dto.AirTemperature;
+import dk.sdu.mmmi.sga.database.entity.AirTemperature;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
 import org.springframework.stereotype.Component;
@@ -27,13 +27,13 @@ public class AirTempCollector extends DatabaseConnection implements DataCollecti
         List<AirTemperature> results = new ArrayList<>();
         try (ResultSet rs = queryExecution("AIR_TEMPERATURE")) {
             while (rs.next()) {
-                AirTemperature airTempDTO = new AirTemperature(
+                AirTemperature airTemp = new AirTemperature(
                         rs.getInt("ID"),
                         rs.getInt("CONTEXT_ID"),
                         rs.getTimestamp("TIME"),
                         rs.getDouble("CELCIUS")
                 );
-                results.add(airTempDTO);
+                results.add(airTemp);
             }
         } catch (SQLException e) {
             e.printStackTrace();

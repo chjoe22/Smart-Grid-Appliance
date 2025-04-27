@@ -1,6 +1,6 @@
-package dk.sdu.mmmi.sga.database.collectors;
+package dk.sdu.mmmi.sga.database.usecase;
 
-import dk.sdu.mmmi.sga.core.dto.OutDoorLight;
+import dk.sdu.mmmi.sga.database.entity.OutDoorLight;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
 import org.springframework.stereotype.Component;

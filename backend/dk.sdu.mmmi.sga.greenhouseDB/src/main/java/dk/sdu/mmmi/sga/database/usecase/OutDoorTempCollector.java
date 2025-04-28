@@ -1,6 +1,6 @@
-package dk.sdu.mmmi.sga.database.collectors;
+package dk.sdu.mmmi.sga.database.usecase;
 
-import dk.sdu.mmmi.sga.core.dto.OutDoorTemperature;
+import dk.sdu.mmmi.sga.database.entity.OutDoorTemperature;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class OutDoorTempCollector extends DatabaseConnection implements DataColl
 
     @Override
     public String getName() {
-        return "OutDoorTemperature";
+        return "OutDoor Temperature";
     }
 
     @Override

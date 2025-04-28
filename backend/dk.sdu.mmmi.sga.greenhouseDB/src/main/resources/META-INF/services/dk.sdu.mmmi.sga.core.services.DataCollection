@@ -1,6 +1,6 @@
-dk.sdu.mmmi.sga.database.collectors.AirTempCollector
-dk.sdu.mmmi.sga.database.collectors.HumidityCollector
-dk.sdu.mmmi.sga.database.collectors.OutDoorLightCollector
-dk.sdu.mmmi.sga.database.collectors.CO2Collector
-dk.sdu.mmmi.sga.database.collectors.MaxOutDoorLightCollector
-dk.sdu.mmmi.sga.database.collectors.OutDoorTempCollector
+dk.sdu.mmmi.sga.database.usecase.AirTempCollector
+dk.sdu.mmmi.sga.database.usecase.HumidityCollector
+dk.sdu.mmmi.sga.database.usecase.OutDoorLightCollector
+dk.sdu.mmmi.sga.database.usecase.CO2Collector
+dk.sdu.mmmi.sga.database.usecase.MaxOutDoorLightCollector
+dk.sdu.mmmi.sga.database.usecase.OutDoorTempCollector

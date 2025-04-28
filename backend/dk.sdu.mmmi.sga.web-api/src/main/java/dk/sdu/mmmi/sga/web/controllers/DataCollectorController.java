@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.sga.web.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,11 @@ public class DataCollectorController {
     }
 
     @GetMapping("/{collectorName}")
-    public List<?> getDataCollection(@PathVariable String collectorName) {
-        return dataCollectorService.getDataCollection(collectorName).stream().limit(5).toList();
+    public ResponseEntity<List<?>> getDataCollection(@PathVariable String collectorName) {
+        List<?> data = dataCollectorService.getDataCollection(collectorName);
+        if (data == null || data.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(data.stream().limit(5).toList());
     }
 }

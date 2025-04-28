@@ -1,6 +1,6 @@
-package dk.sdu.mmmi.sga.database.collectors;
+package dk.sdu.mmmi.sga.database.usecase;
 
-import dk.sdu.mmmi.sga.core.dto.OutDoorLight;
+import dk.sdu.mmmi.sga.database.entity.CO2;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
 import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
 import org.springframework.stereotype.Component;
@@ -11,29 +11,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class OutDoorLightCollector extends DatabaseConnection implements DataCollection<OutDoorLight> {
+public class CO2Collector extends DatabaseConnection implements DataCollection<CO2> {
 
-    public OutDoorLightCollector() {
+    public CO2Collector(){
         super();
     }
-
     @Override
     public String getName() {
-        return "OutDoorLight";
+        return "CO2";
     }
 
     @Override
-    public List<OutDoorLight> collect() {
-        List<OutDoorLight> results = new ArrayList<>();
-        try (ResultSet rs = queryExecution("OUTDOOR_LIGHT")){
-            while(rs.next()){
-                OutDoorLight outDoorLightDTO = new OutDoorLight(
+    public List<CO2> collect() {
+        List<CO2> results = new ArrayList<>();
+        try (ResultSet rs = queryExecution("CO2")){
+            while (rs.next()){
+                CO2 co2DTO = new CO2(
                         rs.getInt("ID"),
                         rs.getInt("CONTEXT_ID"),
                         rs.getTimestamp("TIME"),
-                        rs.getDouble("WATTM2")
+                        rs.getDouble("PPM")
                 );
-                results.add(outDoorLightDTO);
+                results.add(co2DTO);
             }
         }catch (SQLException sqlE){
             sqlE.printStackTrace();

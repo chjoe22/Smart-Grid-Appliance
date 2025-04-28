@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Fri Apr 25 15:02:24 CEST 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0196-6d0a-c4bc-0000030a7218 
+Sun Apr 27 23:44:36 CEST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0196-7935-917a-000002222d98 
 on database directory C:\Users\Vandp\Desktop\Universitet\GreenhouseDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
 Loaded from file:/C:/Users/Vandp/.m2/repository/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
 java.vendor=Eclipse Adoptium
 java.runtime.version=22.0.2+9
-user.dir=C:\Users\Vandp\Smart-Grid-Appliance\Backend\dk.sdu.mmmi.sga.web-api
+user.dir=D:\Github\Smart-Grid-Appliance\backend\dk.sdu.mmmi.sga.web-api
 os.name=Windows 11
 os.arch=amd64
 os.version=10.0

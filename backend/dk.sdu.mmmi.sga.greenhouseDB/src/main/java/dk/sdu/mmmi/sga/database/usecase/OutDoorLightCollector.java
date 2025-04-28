@@ -19,7 +19,7 @@ public class OutDoorLightCollector extends DatabaseConnection implements DataCol
 
     @Override
     public String getName() {
-        return "OutDoorLight";
+        return "OutDoor Light";
     }
 
     @Override

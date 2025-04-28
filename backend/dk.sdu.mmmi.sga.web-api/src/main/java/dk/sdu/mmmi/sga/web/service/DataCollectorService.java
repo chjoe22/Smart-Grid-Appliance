@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import jakarta.annotation.PostConstruct;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 import static java.util.stream.Collectors.toList;
 
@@ -22,10 +23,11 @@ public class DataCollectorService {
             System.out.println("No beans.");
         }
     }
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 10000)
     public void refreshData(){
         System.out.println("Refreshing data...");
-        runCollectors();
+        //runCollectors();
+        runAllCollectors();
     }
 
     @PostConstruct
@@ -39,6 +41,18 @@ public class DataCollectorService {
             dataCollectionMap.put(dataCollection.getName(), data);
             System.out.println("Updated " + dataCollection.getName() + ": " + data.size() + " entries");
         }
+    }
+
+    public void runAllCollectors(){
+        List<CompletableFuture<Void>> completableFutures = new ArrayList<>();
+        for (DataCollection<?> dataCollection : dataCollectionList) {
+            completableFutures.add(CompletableFuture.runAsync(() -> {
+                List<?> data = dataCollection.collect();
+                dataCollectionMap.put(dataCollection.getName(), data);
+            }));
+            System.out.println("Updated " + dataCollection.getName());
+        }
+        CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).join();
     }
 
     public Map<String, List<?>> getDataCollection() {

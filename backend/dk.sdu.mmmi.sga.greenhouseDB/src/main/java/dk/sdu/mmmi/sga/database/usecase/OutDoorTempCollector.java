@@ -18,7 +18,7 @@ public class OutDoorTempCollector extends DatabaseConnection implements DataColl
 
     @Override
     public String getName() {
-        return "OutDoorTemperature";
+        return "OutDoor Temperature";
     }
 
     @Override

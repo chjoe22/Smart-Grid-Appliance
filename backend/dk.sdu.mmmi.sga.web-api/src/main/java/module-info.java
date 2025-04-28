@@ -7,6 +7,10 @@ module web.api {
     requires spring.web;
     requires spring.core;
     requires spring.beans;
+
+    exports dk.sdu.mmmi.sga.web.controllers;
+    exports dk.sdu.mmmi.sga.web.service;
+
     uses dk.sdu.mmmi.sga.core.services.DataCollection;
     opens dk.sdu.mmmi.sga.web to spring.core, spring.beans, spring.context;
     opens dk.sdu.mmmi.sga.web.controllers to spring.core, spring.beans, spring.context;

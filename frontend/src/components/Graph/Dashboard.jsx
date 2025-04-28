@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getExampleData } from '../../api';
-import {
-    Container,
-    Grid,
-    Card,
-    CardContent,
-    Typography,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-} from '@mui/material';
+import {Container, Card, CardContent, Typography, FormControl, InputLabel, Select, MenuItem,} from '@mui/material';
 import { LineChart } from '@mui/x-charts/LineChart';
 
 const Dashboard = () => {
@@ -18,7 +8,7 @@ const Dashboard = () => {
     const [selectedKey, setSelectedKey] = useState('');
 
     useEffect(() => {
-        const fetchSensorData = async () => {
+        const fetchData = async () => {
             try {
                 const result = await getExampleData();
                 setData(result);
@@ -33,8 +23,8 @@ const Dashboard = () => {
             }
         };
 
-        fetchSensorData();
-        const interval = setInterval(fetchSensorData, 10000);
+        fetchData();
+        const interval = setInterval(fetchData, 1000);
         return () => clearInterval(interval);
     }, [selectedKey]);
 

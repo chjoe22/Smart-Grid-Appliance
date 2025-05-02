@@ -4,11 +4,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { getSpecificAPIData } from '../api/specificAPI.js';
 
-export default function ChartCard({ title, selectedSources, onClose }) {
-    const [rawData, setRawData] = useState({});
+export default function ChartCard({ title, selectedSources, chartData, onClose }) {
+    const [rawData, setRawData] = useState( chartData || {});
     const [lastUpdated, setLastUpdated] = useState(null);
 
     const fetchChartData = useCallback(async () => {
+
         const newData = {};
         for (const source of selectedSources) {
             try {
@@ -24,9 +25,13 @@ export default function ChartCard({ title, selectedSources, onClose }) {
         }
         setRawData(newData);
         setLastUpdated(new Date().toLocaleTimeString());
-    }, [selectedSources]);
+    }, [selectedSources, chartData]);
 
     useEffect(() => {
+        if (Object.keys(rawData).length > 0) {
+            setLastUpdated(new Date().toLocaleTimeString());
+            return;
+        }
         fetchChartData();
         const intervalId = setInterval(() => {
             fetchChartData();

@@ -3,10 +3,20 @@ import { Container, Typography, Button, Select, MenuItem, FormControl, InputLabe
 import { getAPIData } from '../components/api/api.js';
 import ChartCard from '../components/chart/ChartCard.jsx';
 
+const sKey = "chartData";
+
 const DataPage = () => {
     const [rawData, setRawData] = useState({});
     const [selectedSources, setSelectedSources] = useState([]);
     const [charts, setCharts] = useState([]);
+
+    useEffect(() => {
+        const saved = localStorage.getItem(sKey);
+        if (saved) {
+            setCharts(JSON.parse(saved));
+        }
+    }, []);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,20 +31,33 @@ const DataPage = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem(sKey, JSON.stringify(charts));
+    }, [charts]);
+
     const handleAddChart = () => {
         if (selectedSources.length === 0) return;
 
         const chartData = {};
         selectedSources.forEach(source => {
-            if (rawData[source]) {
-                chartData[source] = rawData[source];
+            const matchingKey = Object.keys(rawData).find(
+                key => key.toLowerCase() === source.toLowerCase()
+            );
+
+            if (matchingKey) {
+                chartData[source] = rawData[matchingKey];
             }
         });
 
-        setCharts(prev => [
-            ...prev,
-            { id: Date.now(), title: selectedSources.join(', '), selectedSources }
-        ]);
+        const newChart = {
+            id: crypto.randomUUID(),
+            title: selectedSources.join(', '),
+            selectedSources: [...selectedSources],
+            chartData,
+        };
+
+
+        setCharts(prev => [...prev, newChart]);
         setSelectedSources([]);
     };
 
@@ -76,6 +99,7 @@ const DataPage = () => {
                     <ChartCard
                         title={chart.title}
                         selectedSources={chart.selectedSources}
+                        chartData={chart.chartData}
                         onClose={() => handleRemoveChart(chart.id)}
                     />
                 </Box>

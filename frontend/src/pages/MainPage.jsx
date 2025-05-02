@@ -13,10 +13,10 @@ const MainPage = () => {
 
     return (
         <Container maxWidth="md" sx={{ mt: 4 }}>
-            <Typography variant="h4" gutterBottom>Saved Charts</Typography>
+            <Typography variant="h4" gutterBottom>Charts</Typography>
 
             {charts.length === 0 ? (
-                <Typography>No charts found. Go to the Edit page to add some!</Typography>
+                <Typography>No charts found</Typography>
             ) : (
                 charts.map((chart) => (
                     <Box key={chart.id} sx={{ mb: 4 }}>

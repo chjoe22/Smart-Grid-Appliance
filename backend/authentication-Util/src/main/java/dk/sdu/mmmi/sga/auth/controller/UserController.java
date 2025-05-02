@@ -25,7 +25,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User loginUser) {
-        User user = userService.findByUsername(loginUser.getUserName());
+        User user = userService.findByUsername(loginUser.getUsername());
 
         if (user == null) {
             return ResponseEntity.status(401).body("User not found");

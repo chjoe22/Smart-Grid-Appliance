@@ -2,7 +2,6 @@ package dk.sdu.mmmi.sga.auth.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.stereotype.Service;
 
 @Entity
 @Data
@@ -18,7 +17,7 @@ public class User {
     private Long id;
 
     @Column
-    private String userName;
+    private String username;
 
     @Column(nullable = false, unique = true)
     private String email;

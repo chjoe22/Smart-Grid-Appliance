@@ -30,6 +30,6 @@ public class DataCollectorController {
         if (data == null || data.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(data.stream().limit(5).toList());
+        return ResponseEntity.ok(data.stream().toList());
     }
 }

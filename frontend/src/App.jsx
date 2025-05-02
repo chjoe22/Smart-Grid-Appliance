@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayoutDom from "./components/Sidebar/MainLayoutDom.jsx";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp.jsx";
-import MainPage from "./components/MainPage/MainPage.jsx";
+import MainPage from "./pages/MainPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 
 function App() {

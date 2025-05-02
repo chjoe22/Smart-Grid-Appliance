@@ -11,7 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
         "dk.sdu.mmmi.sga.core",
         "dk.sdu.mmmi.sga.web",
         "dk.sdu.mmmi.sga.database",
+        "dk.sdu.mmmi.sga.auth"
 })
+@EnableJpaRepositories(basePackages = "dk.sdu.mmmi.sga.auth.repository")
 public class Application {
 
     // use ./mvnw spring-boot:run to run the spring application

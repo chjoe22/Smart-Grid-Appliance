@@ -33,7 +33,7 @@ public abstract class DatabaseConnection {
     public List<Map<String, Object>> fetchData(String tableName) {
         List<Map<String, Object>> results = new ArrayList<>();
 
-        // Imitates behaviour of polling as "i" increases by 1 each time the Spring scheduler runs
+        // Imitates polling as "i" increases by 1 each time the Spring scheduler runs
         String query = "SELECT * FROM APP." + tableName + " ORDER BY TIME ASC FETCH FIRST "+i+" ROWS ONLY";
 
         // Tries to execute the query and fetch the results

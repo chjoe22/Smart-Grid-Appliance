@@ -5,7 +5,7 @@
       <driver-ref>derby.embedded</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>
-      <jdbc-url>jdbc:derby:$USER_HOME$/Desktop/Universitet/GreenhouseDB</jdbc-url>
+      <jdbc-url>jdbc:derby:$PROJECT_DIR$/../Desktop/Universitet/GreenhouseDB</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
       </jdbc-additional-properties>

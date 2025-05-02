@@ -3,6 +3,7 @@ package dk.sdu.mmmi.sga.database.controller;
 import dk.sdu.mmmi.sga.database.dto.HumidityResponse;
 import dk.sdu.mmmi.sga.database.mapper.HumidityMapper;
 import dk.sdu.mmmi.sga.database.usecase.HumidityCollector;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class HumidityController {
     }
 
     @GetMapping
+    @Scheduled(fixedRate = 10000)
     public List<HumidityResponse> getHumidity() {
         return humidityCollector.collect().stream()
                 .map(humidityMapper::toResponse)

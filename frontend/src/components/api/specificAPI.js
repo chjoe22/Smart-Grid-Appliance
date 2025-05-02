@@ -4,10 +4,9 @@ const api = axios.create({
     baseURL: '/api',
 });
 
-export const getExampleData = async () => {
+export const getSpecificAPIData = async (name) => {
     try {
-        // Fetch data from the API and change the endpoint to match your API
-        const response = await api.get('/data');
+        const response = await api.get('/data' + `/${name}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching data: ', error);

@@ -3,6 +3,7 @@ package dk.sdu.mmmi.sga.database.controller;
 import dk.sdu.mmmi.sga.database.dto.OutDoorLightResponse;
 import dk.sdu.mmmi.sga.database.mapper.OutDoorLightMapper;
 import dk.sdu.mmmi.sga.database.usecase.OutDoorLightCollector;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class OutDoorLightController {
     }
 
     @GetMapping
+    @Scheduled(fixedRate = 10000)
     public List<OutDoorLightResponse> getOutDoorLight() {
         return outDoorLightCollector.collect().stream()
                 .map(outDoorLightMapper::toResponse)

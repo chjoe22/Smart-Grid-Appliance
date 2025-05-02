@@ -28,7 +28,8 @@ export default function ChartCard({ title, selectedSources, chartData, onClose }
     }, [selectedSources, chartData]);
 
     useEffect(() => {
-        if (Object.keys(rawData).length > 0) {
+        if (chartData && Object.keys(chartData).length > 0) {
+            setRawData(chartData);
             setLastUpdated(new Date().toLocaleTimeString());
             return;
         }
@@ -38,7 +39,7 @@ export default function ChartCard({ title, selectedSources, chartData, onClose }
         }, 10000);
 
         return () => clearInterval(intervalId);
-    }, [fetchChartData]);
+    }, [chartData, fetchChartData]);
 
     if (Object.keys(rawData).length === 0) {
         return (
@@ -93,10 +94,12 @@ export default function ChartCard({ title, selectedSources, chartData, onClose }
             <CardHeader
                 title={title}
                 action={
+                onClose ? (
                     <IconButton onClick={onClose}>
                         <CloseIcon />
                     </IconButton>
-                }
+                ) : null
+            }
                 subheader={lastUpdated ? `Last updated: ${lastUpdated}` : null}
                 titleTypographyProps={{ align: 'center', variant: 'h6' }}
             />

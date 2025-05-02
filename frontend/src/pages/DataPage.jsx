@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Button, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import { getAPIData } from '../components/api/api.js';
 import ChartCard from '../components/chart/ChartCard.jsx';
+import chartStorage from '../components/chart/chartStorage.js';
 
-const sKey = "chartData";
 
 const DataPage = () => {
     const [rawData, setRawData] = useState({});
@@ -11,10 +11,7 @@ const DataPage = () => {
     const [charts, setCharts] = useState([]);
 
     useEffect(() => {
-        const saved = localStorage.getItem(sKey);
-        if (saved) {
-            setCharts(JSON.parse(saved));
-        }
+        setCharts(chartStorage.loadCharts());
     }, []);
 
 
@@ -31,9 +28,6 @@ const DataPage = () => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem(sKey, JSON.stringify(charts));
-    }, [charts]);
 
     const handleAddChart = () => {
         if (selectedSources.length === 0) return;
@@ -57,12 +51,14 @@ const DataPage = () => {
         };
 
 
-        setCharts(prev => [...prev, newChart]);
+        const updatedCharts = chartStorage.addChart(newChart);
+        setCharts(updatedCharts);
         setSelectedSources([]);
     };
 
     const handleRemoveChart = (id) => {
-        setCharts(prev => prev.filter(chart => chart.id !== id));
+        const updateCharts = chartStorage.removeChart(id)
+        setCharts(updateCharts)
     };
 
     return (

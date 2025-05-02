@@ -1,28 +1,25 @@
-import { useState, useEffect } from "react";
+export default class chartStorageManager {
+    static sKey = "chartData";
 
-const sKey = "chartData";
-
-export function useChartStorage() {
-    const [chartData, setChartData] = useState(() => {
-        const saved = localStorage.getItem(sKey);
+    static loadCharts() {
+        const saved = localStorage.getItem(chartStorageManager.sKey);
         return saved ? JSON.parse(saved) : [];
-    });
-
-    useEffect(() => {
-        localStorage.setItem(sKey, JSON.stringify(chartData));
-    }, [chartData]);
-
-    const addChart = (chart) => {
-        setChartData((prev) => [...prev, chart]);
-    };
-
-    const removeChart = (id) => {
-        setChartData((prev) => prev.filter((chart) => chart.id !== id));
-    };
-
-    const updateChart = (newChart) => {
-        setChartData(newChart)
     }
 
-    return {chartData, addChart, removeChart, updateChart}
+    static saveCharts(charts) {
+        localStorage.setItem(chartStorageManager.sKey, JSON.stringify(charts));
+    }
+
+    static addChart(newChart) {
+        const charts = chartStorageManager.loadCharts();
+        charts.push(newChart);
+        chartStorageManager.saveCharts(charts);
+        return charts;
+    }
+
+    static removeChart(id) {
+        const charts = chartStorageManager.loadCharts().filter(chart => chart.id !== id);
+        chartStorageManager.saveCharts(charts);
+        return charts;
+    }
 }

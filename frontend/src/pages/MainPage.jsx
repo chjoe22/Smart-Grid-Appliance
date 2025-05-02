@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box } from '@mui/material';
 import ChartCard from '../components/chart/ChartCard';
+import chartStorage from '../components/chart/chartStorage.js';
 
-const STORAGE_KEY = 'chartData';  // same as your storage key
 
 const MainPage = () => {
     const [charts, setCharts] = useState([]);
 
     useEffect(() => {
-        const savedCharts = localStorage.getItem(STORAGE_KEY);
-        if (savedCharts) {
-            setCharts(JSON.parse(savedCharts));
-        }
+        setCharts(chartStorage.loadCharts());
     }, []);
 
     return (
@@ -26,8 +23,8 @@ const MainPage = () => {
                         <ChartCard
                             title={chart.title}
                             selectedSources={chart.selectedSources}
-                            chartData={chart.chartData}  // <-- important
-                            onClose={null}  // no delete button on view page
+                            chartData={chart.chartData}
+                            onClose={null}
                         />
                     </Box>
                 ))

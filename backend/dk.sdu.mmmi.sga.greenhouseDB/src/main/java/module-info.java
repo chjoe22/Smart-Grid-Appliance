@@ -1,4 +1,5 @@
 import dk.sdu.mmmi.sga.core.services.DataCollection;
+import dk.sdu.mmmi.sga.database.usecase.*;
 
 module dk.sdu.mmmi.sga.greenhouseDB {
     requires java.sql;

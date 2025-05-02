@@ -3,6 +3,7 @@ package dk.sdu.mmmi.sga.database.controller;
 import dk.sdu.mmmi.sga.database.dto.CO2Response;
 import dk.sdu.mmmi.sga.database.mapper.CO2Mapper;
 import dk.sdu.mmmi.sga.database.usecase.CO2Collector;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class CO2Controller {
     }
 
     @GetMapping
+    @Scheduled(fixedRate = 10000)
     public List<CO2Response> getCO2() {
         return co2Collector.collect().stream()
                 .map(co2Mapper::toResponse)

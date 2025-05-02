@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {getExampleData} from "./api"
+import {getAPIData} from "./components/api/api.js"
 
 function Example() {
         const [data, setData] = useState(null)
@@ -8,7 +8,7 @@ function Example() {
             const fetchData = async () => {
                 try {
                     // Fetch data from the API
-                    const data = await getExampleData();
+                    const data = await getAPIData();
                     // Example of how to extract only the fields you need
 
                     // Set the data to the state, change filteredData to data to see all fields

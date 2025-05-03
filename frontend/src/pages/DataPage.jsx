@@ -68,9 +68,9 @@ const DataPage = () => {
             {Object.keys(rawData).length > 0 && (
                 <Box sx={{ mb: 4 }}>
                     <FormControl fullWidth>
-                        <InputLabel id="data-source-label">Select Data Sources</InputLabel>
+                        <InputLabel id="data-source">Select Data Sources</InputLabel>
                         <Select
-                            labelId="data-source-label"
+                            labelId="data-source"
                             multiple
                             value={selectedSources}
                             onChange={(e) => setSelectedSources(e.target.value)}
@@ -93,6 +93,7 @@ const DataPage = () => {
             {charts.map((chart) => (
                 <Box key={chart.id} sx={{ mb: 4 }}>
                     <ChartCard
+                        id={chart.id}
                         title={chart.title}
                         selectedSources={chart.selectedSources}
                         chartData={chart.chartData}

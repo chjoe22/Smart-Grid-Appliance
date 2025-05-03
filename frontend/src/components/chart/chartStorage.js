@@ -22,4 +22,15 @@ export default class chartStorageManager {
         chartStorageManager.saveCharts(charts);
         return charts;
     }
+    static updateChart(id, newData) {
+        const chart = chartStorageManager.loadCharts();
+        const updateChart = chart.map(chart => {
+            if (chart.id === id) {
+                return { ...chart, chartData: newData };
+            }
+            return chart;
+        });
+        console.log("updateChart", updateChart);
+        chartStorageManager.saveCharts(updateChart)
+    }
 }

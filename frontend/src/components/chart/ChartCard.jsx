@@ -1,22 +1,25 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import { Card, CardHeader, CardContent, IconButton, Typography } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { getSpecificAPIData } from '../api/specificAPI.js';
+import chartStorageManager from './chartStorage.js';
 
-export default function ChartCard({ title, selectedSources, chartData, onClose }) {
+export default function ChartCard({ id, title, selectedSources, chartData, onClose }) {
     const [rawData, setRawData] = useState( chartData || {});
     const [lastUpdated, setLastUpdated] = useState(null);
+    const [expanded, setExpanded] = useState(true);
 
     const fetchChartData = useCallback(async () => {
-
+        console.log("Fetching data for Chart ID:", id);
         const newData = {};
         for (const source of selectedSources) {
             try {
-                let String = source.replace(/ /g, '');
-                String.toString().toLowerCase();
-                console.log(String)
-                const result = await getSpecificAPIData(String);
+                const sourceFix = source.replace(/ /g, '');
+                console.log(sourceFix)
+                const result = await getSpecificAPIData(sourceFix.toLowerCase());
                 console.log(source + " fetched " + result.length + " records");
                 newData[source] = result;
             } catch (error) {
@@ -25,13 +28,13 @@ export default function ChartCard({ title, selectedSources, chartData, onClose }
         }
         setRawData(newData);
         setLastUpdated(new Date().toLocaleTimeString());
-    }, [selectedSources, chartData]);
+        chartStorageManager.updateChart(id, newData)
+    }, [selectedSources, id]);
 
     useEffect(() => {
         if (chartData && Object.keys(chartData).length > 0) {
             setRawData(chartData);
             setLastUpdated(new Date().toLocaleTimeString());
-            return;
         }
         fetchChartData();
         const intervalId = setInterval(() => {
@@ -49,6 +52,10 @@ export default function ChartCard({ title, selectedSources, chartData, onClose }
                 </CardContent>
             </Card>
         );
+    }
+
+    const handleExpand = () => {
+        setExpanded((prev) => !prev);
     }
 
     const allTimestamps = new Set();
@@ -81,29 +88,36 @@ export default function ChartCard({ title, selectedSources, chartData, onClose }
         return point;
     });
 
-    const series = Object.keys(rawData).map((sensorName, index) => ({
-        label: sensorName,
-        data: unifiedData.map(d => d[sensorName] ?? null),
+    const series = Object.keys(rawData).map((category, index) => ({
+        label: category,
+        data: unifiedData.map(d => d[category] ?? null),
         yAxisKey: index < 2 ? 'left' : 'right',
         showMark: false,
         grid: { vertical: true, horizontal: true}
     }));
 
     return (
-        <Card sx={{ borderRadius: 4, p: 2, backgroundColor: '#f0f4f8' }}>
+        <Card sx={{ minWidth: 850, borderRadius: 4, p: 2, backgroundColor: '#f0f4f8' }}>
             <CardHeader
                 title={title}
                 action={
-                onClose ? (
+                    <>{onClose ? (
                     <IconButton onClick={onClose}>
                         <CloseIcon />
                     </IconButton>
-                ) : null
-            }
+                ) : null}
+                        <IconButton
+                            onClick={handleExpand}
+                            aria-expanded={expanded}
+                            aria-label="show more"
+                            > <ExpandMoreIcon/>
+                        </IconButton>
+            </>}
                 subheader={lastUpdated ? `Last updated: ${lastUpdated}` : null}
                 titleTypographyProps={{ align: 'center', variant: 'h6' }}
             />
             <CardContent>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <LineChart
                     height={300}
                     xAxis={[{ scaleType: 'point', data: xLabels }]}
@@ -111,6 +125,7 @@ export default function ChartCard({ title, selectedSources, chartData, onClose }
                     series={series}
                     width={800}
                 />
+                </Collapse>
             </CardContent>
         </Card>
     );

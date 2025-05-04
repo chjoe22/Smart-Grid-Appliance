@@ -3,6 +3,7 @@ import MainLayoutDom from "./MainLayoutDom";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import DataPage from "./pages/DataPage.jsx";
+import MainPage from "./pages/MainPage.jsx";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 </Route>
                 <Route path="/login" element={<LoginSignUp />} />
                 <Route path="page/data" element={<DataPage />} />
+                <Route path="/main" element={<MainPage/>} />
             </Routes>
         </BrowserRouter>
     );

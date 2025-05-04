@@ -1,4 +1,4 @@
-module web.api {
+module web {
     requires dk.sdu.mmmi.sga.core;
     requires jakarta.annotation;
     requires spring.boot;

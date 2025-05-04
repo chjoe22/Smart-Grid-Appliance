@@ -2,11 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Button, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import { getAPIData } from '../components/api/api.js';
 import ChartCard from '../components/chart/ChartCard.jsx';
+import chartStorage from '../components/chart/chartStorage.js';
+
 
 const DataPage = () => {
     const [rawData, setRawData] = useState({});
     const [selectedSources, setSelectedSources] = useState([]);
     const [charts, setCharts] = useState([]);
+
+    useEffect(() => {
+        setCharts(chartStorage.loadCharts());
+    }, []);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,25 +28,37 @@ const DataPage = () => {
         fetchData();
     }, []);
 
+
     const handleAddChart = () => {
         if (selectedSources.length === 0) return;
 
         const chartData = {};
         selectedSources.forEach(source => {
-            if (rawData[source]) {
-                chartData[source] = rawData[source];
+            const matchingKey = Object.keys(rawData).find(
+                key => key.toLowerCase() === source.toLowerCase()
+            );
+
+            if (matchingKey) {
+                chartData[source] = rawData[matchingKey];
             }
         });
 
-        setCharts(prev => [
-            ...prev,
-            { id: Date.now(), title: selectedSources.join(', '), selectedSources }
-        ]);
+        const newChart = {
+            id: crypto.randomUUID(),
+            title: selectedSources.join(', '),
+            selectedSources: [...selectedSources],
+            chartData,
+        };
+
+
+        const updatedCharts = chartStorage.addChart(newChart);
+        setCharts(updatedCharts);
         setSelectedSources([]);
     };
 
     const handleRemoveChart = (id) => {
-        setCharts(prev => prev.filter(chart => chart.id !== id));
+        const updateCharts = chartStorage.removeChart(id)
+        setCharts(updateCharts)
     };
 
     return (
@@ -49,9 +68,9 @@ const DataPage = () => {
             {Object.keys(rawData).length > 0 && (
                 <Box sx={{ mb: 4 }}>
                     <FormControl fullWidth>
-                        <InputLabel id="data-source-label">Select Data Sources</InputLabel>
+                        <InputLabel id="data-source">Select Data Sources</InputLabel>
                         <Select
-                            labelId="data-source-label"
+                            labelId="data-source"
                             multiple
                             value={selectedSources}
                             onChange={(e) => setSelectedSources(e.target.value)}
@@ -74,8 +93,10 @@ const DataPage = () => {
             {charts.map((chart) => (
                 <Box key={chart.id} sx={{ mb: 4 }}>
                     <ChartCard
+                        id={chart.id}
                         title={chart.title}
                         selectedSources={chart.selectedSources}
+                        chartData={chart.chartData}
                         onClose={() => handleRemoveChart(chart.id)}
                     />
                 </Box>

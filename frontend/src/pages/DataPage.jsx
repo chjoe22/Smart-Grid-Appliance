@@ -90,17 +90,23 @@ const DataPage = () => {
                 </Box>
             )}
 
-            {charts.map((chart) => (
-                <Box key={chart.id} sx={{ mb: 4 }}>
-                    <ChartCard
-                        id={chart.id}
-                        title={chart.title}
-                        selectedSources={chart.selectedSources}
-                        chartData={chart.chartData}
-                        onClose={() => handleRemoveChart(chart.id)}
-                    />
-                </Box>
-            ))}
+            <Box
+                display="grid"
+                gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))"
+                gap={2}>
+                {charts.map((chart) => (
+                    <Box key={chart.id} sx={{ mb: 4 }}>
+                        <ChartCard
+                            id={chart.id}
+                            title={chart.title}
+                            selectedSources={chart.selectedSources}
+                            chartData={chart.chartData}
+                            onClose={() => handleRemoveChart(chart.id)}
+                        />
+                    </Box>
+                ))}
+            </Box>
+
         </Container>
     );
 };

@@ -61,6 +61,11 @@ const DataPage = () => {
         setCharts(updateCharts)
     };
 
+    const handleResizeChart = (id, newSize) => {
+        const updateChartSize = chartStorage.updateSize(id, newSize);
+        setCharts(updateChartSize)
+    }
+
     return (
         <Container maxWidth="md" sx={{ mt: 4 }}>
             <Typography variant="h4" gutterBottom>Manage Charts</Typography>
@@ -92,16 +97,19 @@ const DataPage = () => {
 
             <Box
                 display="grid"
-                gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-                gap={2}>
+                flexWrap="wrap"
+                gap={2}
+                justifyContent="flex-start">
                 {charts.map((chart) => (
-                    <Box key={chart.id} sx={{ mb: 4 }}>
+                    <Box key={chart.id} sx={{ width: chart.size === 2 ? 600 : chart.size === 3 ? 800 : 1000, mb: 4 }}>
                         <ChartCard
                             id={chart.id}
                             title={chart.title}
                             selectedSources={chart.selectedSources}
                             chartData={chart.chartData}
+                            size={chart.size}
                             onClose={() => handleRemoveChart(chart.id)}
+                            onResize={handleResizeChart}
                         />
                     </Box>
                 ))}

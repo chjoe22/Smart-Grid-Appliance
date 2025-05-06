@@ -7,7 +7,7 @@ import { LineChart } from '@mui/x-charts/LineChart';
 import { getSpecificAPIData } from '../api/specificAPI.js';
 import chartStorageManager from './chartStorage.js';
 
-export default function ChartCard({ id, title, selectedSources, chartData, onClose }) {
+export default function ChartCard({ id, title, selectedSources, chartData, onClose, onResize }) {
     const [rawData, setRawData] = useState( chartData || {});
     const [lastUpdated, setLastUpdated] = useState(null);
     const [expanded, setExpanded] = useState(true);
@@ -60,7 +60,10 @@ export default function ChartCard({ id, title, selectedSources, chartData, onClo
     }
 
     const handleResize = (newSize) => {
-        setChartWidth(newSize)
+        setChartWidth(newSize);
+        if (onResize) {
+            onResize(id, newSize === 600 ? 2 : newSize === 800 ? 3 : 6);
+        }
     }
 
     const allTimestamps = new Set();

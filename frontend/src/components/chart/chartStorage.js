@@ -33,4 +33,15 @@ export default class chartStorageManager {
         console.log("updateChart", updateChart);
         chartStorageManager.saveCharts(updateChart)
     }
+    static updateSize(id, newSize) {
+        const chart = chartStorageManager.loadCharts()
+        const updateChart = chart.map(chart => {
+            if (chart.id === id) {
+                return { ...chart, size: newSize };
+            }
+            return chart;
+        });
+        chartStorageManager.saveCharts(updateChart)
+        return updateChart;
+    }
 }

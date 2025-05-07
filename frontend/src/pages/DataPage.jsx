@@ -48,6 +48,7 @@ const DataPage = () => {
             title: selectedSources.join(', '),
             selectedSources: [...selectedSources],
             chartData,
+            size: 2,
         };
 
 
@@ -96,18 +97,22 @@ const DataPage = () => {
             )}
 
             <Box
-                display="grid"
-                flexWrap="wrap"
-                gap={2}
-                justifyContent="flex-start">
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    flexDirection: 'row',
+                    alignContent: 'space-between',
+                    p: 2,
+                    m: 1,
+                }}>
                 {charts.map((chart) => (
-                    <Box key={chart.id} sx={{ width: chart.size === 2 ? 600 : chart.size === 3 ? 800 : 1000, mb: 4 }}>
+                    <Box key={chart.id} sx={{ mb: 4 }}>
                         <ChartCard
                             id={chart.id}
                             title={chart.title}
                             selectedSources={chart.selectedSources}
                             chartData={chart.chartData}
-                            size={chart.size}
+                            size={chart.size || 2}
                             onClose={() => handleRemoveChart(chart.id)}
                             onResize={handleResizeChart}
                         />

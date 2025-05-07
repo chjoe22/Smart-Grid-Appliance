@@ -7,11 +7,10 @@ import { LineChart } from '@mui/x-charts/LineChart';
 import { getSpecificAPIData } from '../api/specificAPI.js';
 import chartStorageManager from './chartStorage.js';
 
-export default function ChartCard({ id, title, selectedSources, chartData, onClose, onResize }) {
+export default function ChartCard({ id, title, selectedSources, chartData, size, onClose, onResize }) {
     const [rawData, setRawData] = useState( chartData || {});
     const [lastUpdated, setLastUpdated] = useState(null);
     const [expanded, setExpanded] = useState(true);
-    const [chartWidth, setChartWidth] = useState(800);
 
     const fetchChartData = useCallback(async () => {
         console.log("Fetching data for Chart ID:", id);
@@ -60,9 +59,8 @@ export default function ChartCard({ id, title, selectedSources, chartData, onClo
     }
 
     const handleResize = (newSize) => {
-        setChartWidth(newSize);
         if (onResize) {
-            onResize(id, newSize === 600 ? 2 : newSize === 800 ? 3 : 6);
+            onResize(id, newSize);
         }
     }
 
@@ -105,7 +103,14 @@ export default function ChartCard({ id, title, selectedSources, chartData, onClo
     }));
 
     return (
-        <Card sx={{ width: chartWidth, borderRadius: 4, p: 2, backgroundColor: '#f0f4f8' }}>
+        <Card sx={{
+            gridColumn: size === 2 ? 'span 1' : 'span 2',
+            width: '100%',
+            borderRadius: 4,
+            p: 2,
+            backgroundColor: '#f0f4f8',
+            boxSizing: 'border-box',
+        }}>
             <CardHeader
                 title={title}
                 action={
@@ -131,14 +136,13 @@ export default function ChartCard({ id, title, selectedSources, chartData, onClo
                     xAxis={[{ scaleType: 'point', data: xLabels }]}
                     yAxis={[{ id: 'left' }, { id: 'right' }]}
                     series={series}
-                    width={chartWidth-40}
+                    width={(size === 2 ? 750 : 1600) - 40}
                 />
                 </Collapse>
             </CardContent>
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                <Button onClick={() => handleResize(600)}>Small</Button>
-                <Button onClick={() => handleResize(800)}>Medium</Button>
-                <Button onClick={() => handleResize(1000)}>Large</Button>
+                <Button onClick={() => handleResize(2)}>Medium</Button>
+                <Button onClick={() => handleResize(3)}>Large</Button>
             </Box>
         </Card>
     );

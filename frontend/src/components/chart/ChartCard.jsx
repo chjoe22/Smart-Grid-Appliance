@@ -15,7 +15,6 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
     const [rawData, setRawData] = useState( chartData || {});
     const [lastUpdated, setLastUpdated] = useState(null);
     const [expanded, setExpanded] = useState(true);
-    const [fullscreen, setFullscreen] = useState(false);
 
     const fetchChartData = useCallback(async () => {
         console.log("Fetching data for Chart ID:", id);

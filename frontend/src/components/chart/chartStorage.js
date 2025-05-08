@@ -34,14 +34,36 @@ export default class chartStorageManager {
         chartStorageManager.saveCharts(updateChart)
     }
     static updateSize(id, newSize) {
-        const chart = chartStorageManager.loadCharts()
-        const updateChart = chart.map(chart => {
+        const charts = chartStorageManager.loadCharts();
+        const updatedCharts = charts.map(chart => {
             if (chart.id === id) {
                 return { ...chart, size: newSize };
             }
             return chart;
         });
-        chartStorageManager.saveCharts(updateChart)
-        return updateChart;
+        chartStorageManager.saveCharts(updatedCharts);
+        return updatedCharts;
     }
+
+    static moveChartUp(id) {
+        const charts = chartStorageManager.loadCharts();
+        const index = charts.findIndex(c => c.id === id);
+        if (index > 0) {
+            [charts[index - 1], charts[index]] = [charts[index], charts[index - 1]];
+            chartStorageManager.saveCharts(charts);
+        }
+        return charts;
+    }
+
+    static moveChartDown(id) {
+        const charts = chartStorageManager.loadCharts();
+        const index = charts.findIndex(c => c.id === id);
+        if (index < charts.length - 1) {
+            [charts[index], charts[index + 1]] = [charts[index + 1], charts[index]];
+            chartStorageManager.saveCharts(charts);
+        }
+        return charts;
+    }
+
+
 }

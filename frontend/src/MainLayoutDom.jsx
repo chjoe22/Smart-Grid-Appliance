@@ -1,4 +1,3 @@
-// src/MainLayoutDom.jsx
 import { useState } from "react";
 import { Button, Layout, theme } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";

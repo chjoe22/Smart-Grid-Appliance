@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box } from '@mui/material';
 import ChartCard from '../components/chart/ChartCard';
 import chartStorage from '../components/chart/chartStorage.js';
+import ChartGrid from "../components/chart/ChartGrid.jsx";
 
 
 const MainPage = () => {
@@ -11,24 +12,32 @@ const MainPage = () => {
         setCharts(chartStorage.loadCharts());
     }, []);
 
+    const handleResizeChart = (id, newSize) => {
+        const updated = chartStorage.updateSize(id, newSize);
+        setCharts(updated);
+    };
+
+    const handleMoveChartUp = (id) => {
+        const updated = chartStorage.moveChartUp(id);
+        setCharts(updated);
+    };
+
+    const handleMoveChartDown = (id) => {
+        const updated = chartStorage.moveChartDown(id);
+        setCharts(updated);
+    };
+
     return (
-        <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Container maxWidth={false} sx={{ mt: 4 }}>
             <Typography variant="h4" gutterBottom>Charts</Typography>
 
-            {charts.length === 0 ? (
-                <Typography>No charts found</Typography>
-            ) : (
-                charts.map((chart) => (
-                    <Box key={chart.id} sx={{ mb: 4 }}>
-                        <ChartCard
-                            title={chart.title}
-                            selectedSources={chart.selectedSources}
-                            chartData={chart.chartData}
-                            onClose={null}
-                        />
-                    </Box>
-                ))
-            )}
+            <ChartGrid
+                charts={charts}
+                onRemove={null}
+                onResize={handleResizeChart}
+                onMoveUp={handleMoveChartUp}
+                onMoveDown={handleMoveChartDown}
+            />
         </Container>
     );
 };

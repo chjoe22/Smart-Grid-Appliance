@@ -121,3 +121,36 @@
     cursor: pointer;
     margin: 1px auto 0 auto;
 }
+.toast {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 200px;
+    max-width: 80%;
+    padding: 16px 24px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    z-index: 9999;
+    opacity: 0;
+    animation: fadeInOut 3s ease forwards;
+    pointer-events: none;
+}
+.toast.success {
+    color: #1a472a;
+    background: #e6ffed;
+    border: 1px solid #b7f5c5;
+}
+
+.toast.error {
+    color: #611a15;
+    background: #fdecea;
+    border: 1px solid #f5c2c0;
+}
+@keyframes fadeInOut {
+    0%   { opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { opacity: 0; }
+}

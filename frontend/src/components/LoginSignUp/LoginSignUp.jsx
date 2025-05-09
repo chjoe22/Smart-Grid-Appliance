@@ -1,97 +1,146 @@
 import React, {useState} from 'react'
 import './LoginSignUp.css'
-import user_icon from '../Assets/person.png'
-import email_icon from '../Assets/email.png'
-import password_icon from '../Assets/password.png'
-
+import {useNavigate} from 'react-router-dom';
+import './LoginSignUp.css';
+import user_icon from '../Assets/person.png';
+import email_icon from '../Assets/email.png';
+import password_icon from '../Assets/password.png';
 
 const LoginSignUp = () => {
-
-    const [action, setAction] = useState("Sign Up");
+    const [isLogin, setIsLogin] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const handleSubmit = async () => {
-        const payload = { email, password };
-        if (action === "Sign Up") {
-            payload.name = name;
-        }
+    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
+    const [messageType, setMessageType] = useState("");
 
-        const endpoint = action === "Login" ? "/api/login" : "/api/signup";
+
+    const handleRegister = async () => {
+        const payload = {
+            username: email,
+            email,
+            password
+        };
 
         try {
-            const response = await fetch(endpoint, {
+            const response = await fetch("http://localhost:8080/api/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             });
 
-            const data = await response.json();
-            console.log(data); // handle success or error
+            const data = await response.text();
+
+            if (response.ok) {
+                setMessage("Registration successful!");
+                setMessageType("success");
+            } else {
+                setMessage(`Error: ${data}`);
+                setMessageType("error");
+            }
         } catch (error) {
-            console.error("Error:", error);
+            setMessage("Network error during registration.");
+            console.error("Register Error:", error);
         }
     };
 
+    const handleLogin = async () => {
+        const payload = {
+            email,
+            password
+        };
 
+        try {
+            const response = await fetch("http://localhost:8080/api/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.text();
+
+            if (response.ok) {
+                setMessage("Login successful!");
+                setTimeout(() => navigate("/"), 1000);
+            } else {
+                setMessage(`Error: ${data}`);
+            }
+        } catch (error) {
+            setMessage("Network error during login.");
+            console.error("Login Error:", error);
+        }
+    };
 
     return (
         <div className="login-wrapper">
             <div className='container'>
                 <div className="header">
-                    <div className="text">{action}</div>
+                    <div className="text">{isLogin ? "Login" : "Sign Up"}</div>
                     <div className="underline"></div>
                 </div>
-                <div className="inputs">
-                    {action === "Login" ? <div></div> : <div className="input">
-                        <img src={user_icon} alt=""/>
-                        <input
-                            type="text"
-                            placeholder="Enter Name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
 
-                    </div>}
+                <div className="inputs">
+                    {!isLogin && (
+                        <div className="input">
+                            <img src={user_icon} alt="user" />
+                            <input
+                                type="text"
+                                placeholder="Enter Name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </div>
+                    )}
 
                     <div className="input">
-                        <img src={email_icon} alt=""/>
-                        <input type="email"
-                               placeholder="Enter E-mail"
-                               value={email}
-                               onChange={(e) => setEmail(e.target.value)}
+                        <img src={email_icon} alt="email" />
+                        <input
+                            type="email"
+                            placeholder="Enter Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
+
                     <div className="input">
-                        <img src={password_icon} alt=""/>
-                        <input type="password"
-                               placeholder="Enter Password"
-                               value={password}
-                               onChange={(e) => setPassword(e.target.value)}
+                        <img src={password_icon} alt="password" />
+                        <input
+                            type="password"
+                            placeholder="Enter Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                 </div>
-                {action === "Sign Up" ? <div></div> :
-                    <div className="forgot-password">Lost Password? <span>Click Here!</span></div>}
+
+                {message && (
+                    <div
+                        className={`toast ${messageType}`}
+                        onAnimationEnd={() => setMessage("")}
+                    >
+                        {message}
+                    </div>
+                )}
+
 
                 <div className="submit-container">
-                    <div className={action === "Login" ? "submit gray" : "submit"} onClick={() => {
-                        setAction("Sign Up")
-                    }}>Sign Up
+                    <div className="submit" onClick={handleRegister}>
+                        Register
                     </div>
-                    <div className={action === "Sign Up" ? "submit gray" : "submit"} onClick={() => {
-                        setAction("Login")
-                    }}>Login
+                    <div className="submit" onClick={handleLogin}>
+                        Login
                     </div>
-                </div>
-                <div className="submitButton" onClick={handleSubmit}>
-                    {action === "Login" ? "Login" : "Submit"}
                 </div>
 
+                <div className="toggle-mode">
+                    <span onClick={() => setIsLogin(!isLogin)}>
+                        {isLogin ? "Don't have an account? Sign up here." : "Already have an account? Log in here."}
+                    </span>
+                </div>
             </div>
         </div>
     );
-}
+};
 
-export default LoginSignUp
-
+export default LoginSignUp;

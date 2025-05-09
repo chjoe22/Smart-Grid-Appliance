@@ -3,6 +3,7 @@ import { Container, Typography, Button, Select, MenuItem, FormControl, InputLabe
 import { getAPIData } from '../components/api/api.js';
 import ChartCard from '../components/chart/ChartCard.jsx';
 import chartStorage from '../components/chart/chartStorage.js';
+import ChartGrid from '../components/chart/ChartGrid.jsx';
 
 
 const DataPage = () => {
@@ -48,6 +49,7 @@ const DataPage = () => {
             title: selectedSources.join(', '),
             selectedSources: [...selectedSources],
             chartData,
+            size: 2,
         };
 
 
@@ -61,8 +63,23 @@ const DataPage = () => {
         setCharts(updateCharts)
     };
 
+    const handleResizeChart = (id, newSize) => {
+        const updateChartSize = chartStorage.updateSize(id, newSize);
+        setCharts(updateChartSize);
+    }
+
+    const handleMoveChartUp = (id) => {
+        const updateChartMovedUp = chartStorage.moveChartUp(id);
+        setCharts(updateChartMovedUp);
+    };
+
+    const handleMoveChartDown = (id) => {
+        const updateChartMovedDown = chartStorage.moveChartDown(id);
+        setCharts(updateChartMovedDown);
+    };
+
     return (
-        <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Container maxWidth={false} sx={{ mt: 4 }}>
             <Typography variant="h4" gutterBottom>Manage Charts</Typography>
 
             {Object.keys(rawData).length > 0 && (
@@ -90,17 +107,13 @@ const DataPage = () => {
                 </Box>
             )}
 
-            {charts.map((chart) => (
-                <Box key={chart.id} sx={{ mb: 4 }}>
-                    <ChartCard
-                        id={chart.id}
-                        title={chart.title}
-                        selectedSources={chart.selectedSources}
-                        chartData={chart.chartData}
-                        onClose={() => handleRemoveChart(chart.id)}
-                    />
-                </Box>
-            ))}
+            <ChartGrid
+                charts={charts}
+                onRemove={handleRemoveChart}
+                onResize={handleResizeChart}
+                onMoveUp={handleMoveChartUp}
+                onMoveDown={handleMoveChartDown}
+            />
         </Container>
     );
 };

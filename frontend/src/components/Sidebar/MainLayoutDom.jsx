@@ -1,4 +1,3 @@
-// src/MainLayoutDom.jsx
 import { useState } from "react";
 import { Button, Layout, theme } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
@@ -22,7 +21,7 @@ export default function MainLayoutDom() {
     } = theme.useToken();
 
     return (
-        <Layout style={{ minHeight: "100vh" }}>
+        <Layout style={{ minHeight: "100vh", display: "flex", flexDirection: "row" }}>
             <Sider
                 collapsed={collapsed}
                 collapsible
@@ -35,7 +34,7 @@ export default function MainLayoutDom() {
                 <ToggleThemeButton darkTheme={darkTheme} ToggleTheme={toggleTheme} />
             </Sider>
 
-            <Layout>
+            <Layout style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                 <Header style={{ padding: 0, background: colorBgContainer }}>
                     <Button
                         type="text"
@@ -45,7 +44,14 @@ export default function MainLayoutDom() {
                     />
                 </Header>
 
-                <Content style={{ margin: "16px" }}>
+                <Content style={{
+                    padding: 16,
+                    width: '100%',
+                    maxWidth: '100vw',
+                    flex: 1,
+                    overflowX: 'auto',
+                    boxSizing: 'border-box'
+                }}>
                     <Outlet />
                 </Content>
             </Layout>

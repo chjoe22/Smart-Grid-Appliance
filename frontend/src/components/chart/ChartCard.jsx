@@ -1,13 +1,17 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import { Card, CardHeader, CardContent, IconButton, Typography } from '@mui/material';
+import { Card, CardHeader, CardContent, IconButton, Typography, Box } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { getSpecificAPIData } from '../api/specificAPI.js';
 import chartStorageManager from './chartStorage.js';
 
-export default function ChartCard({ id, title, selectedSources, chartData, onClose }) {
+export default function ChartCard({ id, title, selectedSources, chartData, size, onClose, onResize, onMoveUp, onMoveDown }) {
     const [rawData, setRawData] = useState( chartData || {});
     const [lastUpdated, setLastUpdated] = useState(null);
     const [expanded, setExpanded] = useState(true);
@@ -93,38 +97,71 @@ export default function ChartCard({ id, title, selectedSources, chartData, onClo
         data: unifiedData.map(d => d[category] ?? null),
         yAxisKey: index < 2 ? 'left' : 'right',
         showMark: false,
-        grid: { vertical: true, horizontal: true}
     }));
 
     return (
-        <Card sx={{ minWidth: 850, borderRadius: 4, p: 2, backgroundColor: '#f0f4f8' }}>
+        <Card sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            borderRadius: 4,
+            p: 2,
+            backgroundColor: '#f0f4f8',
+            boxSizing: 'border-box',
+            minWidth: 0,
+            maxWidth: '100%',
+        }}>
             <CardHeader
                 title={title}
                 action={
-                    <>{onClose ? (
+                    <>
+                    <IconButton onClick={() => onResize?.(id, size === 3 ? 2 : 3)}>
+                        {size === 3 ? <FullscreenExitIcon /> : <FullscreenIcon />}
+                    </IconButton>
+                {onClose ? (
                     <IconButton onClick={onClose}>
                         <CloseIcon />
+                    </IconButton>
+                ) : null}
+                {onMoveUp ? (
+                    <IconButton onClick={() => onMoveUp(id)}>
+                        <ArrowUpwardIcon />
+                    </IconButton>
+                ) : null}
+                {onMoveDown ? (
+                    <IconButton onClick={() => onMoveDown(id)}>
+                        <ArrowDownwardIcon />
                     </IconButton>
                 ) : null}
                         <IconButton
                             onClick={handleExpand}
                             aria-expanded={expanded}
-                            aria-label="show more"
-                            > <ExpandMoreIcon/>
+                            aria-label="show more">
+                            <ExpandMoreIcon/>
                         </IconButton>
             </>}
                 subheader={lastUpdated ? `Last updated: ${lastUpdated}` : null}
                 titleTypographyProps={{ align: 'center', variant: 'h6' }}
             />
             <CardContent>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <LineChart
-                    height={300}
-                    xAxis={[{ scaleType: 'point', data: xLabels }]}
-                    yAxis={[{ id: 'left' }, { id: 'right' }]}
-                    series={series}
-                    width={800}
-                />
+                <Collapse in={expanded} timeout="auto">
+                    <Box sx={{
+                        flexGrow: 1,
+                        width: '100%',
+                        maxWidth: '100%',
+                        overflow: 'hidden',
+                        boxSizing: 'border-box',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}>
+                        <LineChart
+                            sx={{ width: '100%', minWidth: '100%',  height: 300 }}
+                            xAxis={[{ scaleType: 'point', data: xLabels }]}
+                            yAxis={[{ id: 'left' }, { id: 'right' }]}
+                            series={series}
+                            grid={{ vertical: true, horizontal: true }}
+                        />
+                    </Box>
                 </Collapse>
             </CardContent>
         </Card>

@@ -5,7 +5,10 @@ import dk.sdu.mmmi.sga.auth.repository.UserRepository;
 import dk.sdu.mmmi.sga.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -24,22 +27,34 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User loginUser) {
-        User user = userService.findByUsername(loginUser.getUsername());
+    public ResponseEntity<String> login(@RequestBody User loginRequest) {
+        Optional<User> userOptional = userService.findByUsername(loginRequest.getUsername());
 
-        if (user == null) {
+        if (userOptional.isEmpty()) {
             return ResponseEntity.status(401).body("User not found");
         }
 
-        if (!user.getPassword().equals(loginUser.getPassword())) {
-            return ResponseEntity.status(401).body("Invalid password");
+        User user = userOptional.get();
+
+        boolean passwordMatches = new BCryptPasswordEncoder().matches(
+                loginRequest.getPassword(),
+                user.getPassword()
+        );
+
+        if (!passwordMatches) {
+            return ResponseEntity.status(401).body("Invalid credentials");
         }
 
         return ResponseEntity.ok("Login successful");
     }
 
-    public User findByUsername(String username) {
+
+
+    public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+
+
 }
+

@@ -11,6 +11,8 @@ module authentication {
     requires spring.data.jpa;
     requires jakarta.persistence;
     requires spring.security.core;
+    requires spring.security.config;
+    requires spring.security.web;
 
     exports dk.sdu.mmmi.sga.auth.repository;
     exports dk.sdu.mmmi.sga.auth.entity;

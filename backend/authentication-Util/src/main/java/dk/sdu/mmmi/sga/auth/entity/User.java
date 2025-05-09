@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 @Builder
 @Getter
 @Setter
-@Table(name = "app_user")
 public class User {
 
     @Id

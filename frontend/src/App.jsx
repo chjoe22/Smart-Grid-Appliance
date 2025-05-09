@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainLayoutDom from "./MainLayoutDom";
+import MainLayoutDom from "./components/Sidebar/MainLayoutDom.jsx";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp.jsx";
-import HomePage from "./pages/HomePage.jsx";
 import DataPage from "./pages/DataPage.jsx";
 import MainPage from "./pages/MainPage.jsx";
 

@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { Button, Layout, theme } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import Logo from "./components/Logo";
-import MenuList from "./components/Sidebar/MenuList";
-import ToggleThemeButton from "./components/Sidebar/ToggleThemeButton";
+import Logo from "../Logo.jsx";
+import MenuList from "./MenuList.jsx";
+import ToggleThemeButton from "./ToggleThemeButton.jsx";
 import { Outlet } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;

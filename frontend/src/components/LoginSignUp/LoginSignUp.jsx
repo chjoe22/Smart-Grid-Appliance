@@ -13,7 +13,7 @@ const LoginSignUp = () => {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
-    const [messageType, setMessageType] = useState(""); // "success" | "error"
+    const [messageType, setMessageType] = useState("");
 
 
     const handleRegister = async () => {

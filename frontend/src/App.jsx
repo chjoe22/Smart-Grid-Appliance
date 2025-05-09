@@ -4,6 +4,7 @@ import MainLayoutDom from "./components/Sidebar/MainLayoutDom.jsx";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp.jsx";
 import MainPage from "./pages/MainPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import DataPage from "./pages/DataPage.jsx";
 
 function App() {
     return (
@@ -15,6 +16,8 @@ function App() {
                 </Route>
                 <Route path="/login" element={<LoginSignUp />} />
                 <Route path="/main" element={<MainPage />} />
+                <Route path="page/data" element={<DataPage />} />
+                <Route path="/main" element={<MainPage/>} />
             </Routes>
         </BrowserRouter>
     );

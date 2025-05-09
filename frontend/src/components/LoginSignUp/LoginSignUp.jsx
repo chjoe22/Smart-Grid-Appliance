@@ -13,6 +13,8 @@ const LoginSignUp = () => {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
+    const [messageType, setMessageType] = useState(""); // "success" | "error"
+
 
     const handleRegister = async () => {
         const payload = {
@@ -32,8 +34,10 @@ const LoginSignUp = () => {
 
             if (response.ok) {
                 setMessage("Registration successful!");
+                setMessageType("success");
             } else {
                 setMessage(`Error: ${data}`);
+                setMessageType("error");
             }
         } catch (error) {
             setMessage("Network error during registration.");
@@ -110,7 +114,15 @@ const LoginSignUp = () => {
                     </div>
                 </div>
 
-                {message && <div className="message">{message}</div>}
+                {message && (
+                    <div
+                        className={`toast ${messageType}`}
+                        onAnimationEnd={() => setMessage("")}
+                    >
+                        {message}
+                    </div>
+                )}
+
 
                 <div className="submit-container">
                     <div className="submit" onClick={handleRegister}>

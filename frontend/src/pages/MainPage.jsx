@@ -28,17 +28,19 @@ const MainPage = () => {
     };
 
     return (
-        <Container maxWidth={false} sx={{ mt: 4 }}>
-            <Typography variant="h4" gutterBottom>Charts</Typography>
+        <Box sx={{ flexGrow: 1, width: '100%', overflowX: 'hidden' }}>
+            <Box sx={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', mt: 4 }}>
+                <Typography variant="h4" gutterBottom>Charts</Typography>
 
-            <ChartGrid
-                charts={charts}
-                onRemove={null}
-                onResize={handleResizeChart}
-                onMoveUp={handleMoveChartUp}
-                onMoveDown={handleMoveChartDown}
-            />
-        </Container>
+                <ChartGrid
+                    charts={charts}
+                    onRemove={null}
+                    onResize={handleResizeChart}
+                    onMoveUp={handleMoveChartUp}
+                    onMoveDown={handleMoveChartDown}
+                />
+            </Box>
+        </Box>
     );
 };
 

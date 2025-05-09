@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./MainLayoutDom";
 import HomePage from "./pages/HomePage";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp.jsx";
+import MainPage from "./pages/MainPage.jsx";
 
 function App() {
     return (

@@ -10,13 +10,16 @@ const ChartGrid = ({ charts, onRemove, onResize, onMoveUp, onMoveDown }) => {
                 gridTemplateColumns: 'repeat(2, 1fr)',
                 gap: 2,
                 width: '100%',
+                maxWidth: '100%',
+                overflow: 'hidden',
+                boxSizing: 'border-box',
             }}
         >
             {charts.map(chart => (
                 <Box
                     key={chart.id}
                     sx={{
-                        gridColumn: chart.size === 3 ? 'span 2' : 'span 1',
+                        gridColumn: chart.size === 3 ? '1 / -1' : 'auto',
                         boxSizing: 'border-box',
                         width: '100%',
                         minWidth: 0,

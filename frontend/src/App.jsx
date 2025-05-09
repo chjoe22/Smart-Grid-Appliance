@@ -10,12 +10,10 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<MainLayoutDom />}>
-                    <Route index element={<HomePage />} />
-
+                    <Route index element={<MainPage />} />
+                    <Route path="data" element={<DataPage />} />
+                    <Route path="/login" element={<LoginSignUp />} />
                 </Route>
-                <Route path="/login" element={<LoginSignUp />} />
-                <Route path="page/data" element={<DataPage />} />
-                <Route path="/main" element={<MainPage/>} />
             </Routes>
         </BrowserRouter>
     );

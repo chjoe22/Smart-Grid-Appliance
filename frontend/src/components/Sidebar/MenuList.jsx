@@ -31,8 +31,8 @@ const MenuList = ({ darkTheme }) => {
                     </Menu.Item>
                 </Menu.SubMenu>
             </Menu.SubMenu>
-            <Menu.Item key="progress" icon={<AreaChartOutlined />}>
-                <Link to="/progress">Progress</Link>
+            <Menu.Item key="Data" icon={<AreaChartOutlined />}>
+                <Link to="/data">Data</Link>
             </Menu.Item>
             <Menu.Item key="payment" icon={<PayCircleOutlined />}>
                 <Link to="/payment">Payment</Link>

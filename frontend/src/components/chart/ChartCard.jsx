@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import { Card, CardHeader, CardContent, IconButton, Typography, Box, Button } from '@mui/material';
+import { Card, CardHeader, CardContent, IconButton, Typography, Box } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -97,7 +97,6 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
         data: unifiedData.map(d => d[category] ?? null),
         yAxisKey: index < 2 ? 'left' : 'right',
         showMark: false,
-        grid: { vertical: true, horizontal: true}
     }));
 
     return (
@@ -110,6 +109,7 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
             backgroundColor: '#f0f4f8',
             boxSizing: 'border-box',
             minWidth: 0,
+            maxWidth: '100%',
         }}>
             <CardHeader
                 title={title}
@@ -148,6 +148,9 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
                     <Box sx={{
                         flexGrow: 1,
                         width: '100%',
+                        maxWidth: '100%',
+                        overflow: 'hidden',
+                        boxSizing: 'border-box',
                         display: 'flex',
                         justifyContent: 'center',
                     }}>
@@ -156,6 +159,7 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
                             xAxis={[{ scaleType: 'point', data: xLabels }]}
                             yAxis={[{ id: 'left' }, { id: 'right' }]}
                             series={series}
+                            grid={{ vertical: true, horizontal: true }}
                         />
                     </Box>
                 </Collapse>

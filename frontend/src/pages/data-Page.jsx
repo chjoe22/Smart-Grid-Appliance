@@ -3,6 +3,7 @@ import { Container, Typography, Button, Select, MenuItem, FormControl, InputLabe
 import { getAPIData } from '../components/api/api.js';
 import chartStorage from '../components/chart/chartStorage.js';
 import ChartGrid from '../components/chart/ChartGrid.jsx';
+import {fetchChartData} from "../components/chart/chartDataManager.js";
 
 
 const DataPage = () => {
@@ -29,23 +30,14 @@ const DataPage = () => {
     }, []);
 
 
-    const handleAddChart = () => {
+    const handleAddChart =  async () => {
         if (selectedSources.length === 0) return;
 
-        const chartData = {};
-        selectedSources.forEach(source => {
-            const matchingKey = Object.keys(rawData).find(
-                key => key.toLowerCase() === source.toLowerCase()
-            );
-
-            if (matchingKey) {
-                chartData[source] = rawData[matchingKey];
-            }
-        });
+        const chartData = await fetchChartData(selectedSources)
 
         const newChart = {
             id: crypto.randomUUID(),
-            title: selectedSources.join(', '),
+            title: "Chart " + (chartStorage.loadCharts().length + 1).toString(),
             selectedSources: [...selectedSources],
             chartData,
             size: 2,
@@ -93,8 +85,8 @@ const DataPage = () => {
                             label="Select Data Sources"
                         >
                             {Object.keys(rawData).map((source) => (
-                                <MenuItem key={source} value={source.toString().toLowerCase()}>
-                                    {source}
+                                <MenuItem key={source} value={source}>
+                                {source}
                                 </MenuItem>
                             ))}
                         </Select>

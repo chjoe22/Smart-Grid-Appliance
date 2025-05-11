@@ -19,6 +19,7 @@
     "axios": "^1.8.3",
     "backbone": "^1.6.0",
     "jquery": "^3.7.1",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-grid-layout": "^1.5.1",

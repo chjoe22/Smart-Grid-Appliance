@@ -34,7 +34,6 @@ const MainPage = () => {
 
                 <ChartGrid
                     charts={charts}
-                    onRemove={null}
                     onResize={handleResizeChart}
                     onMoveUp={handleMoveChartUp}
                     onMoveDown={handleMoveChartDown}

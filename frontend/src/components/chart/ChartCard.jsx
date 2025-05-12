@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardHeader, CardContent, IconButton, Typography, Box } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -11,7 +12,7 @@ import { LineChart } from '@mui/x-charts/LineChart';
 import { getSpecificAPIData } from '../api/specificAPI.js';
 import chartStorageManager from './chartStorage.js';
 
-export default function ChartCard({ id, title, selectedSources, chartData, size, onClose, onResize, onMoveUp, onMoveDown }) {
+export default function ChartCard({ id, title, selectedSources, chartData, size, onClose, onResize, onMoveUp, onMoveDown}) {
     const [rawData, setRawData] = useState( chartData || {});
     const [lastUpdated, setLastUpdated] = useState(null);
     const [expanded, setExpanded] = useState(true);
@@ -51,6 +52,16 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
     if (Object.keys(rawData).length === 0) {
         return (
             <Card sx={{ borderRadius: 4, p: 2, backgroundColor: '#f0f4f8' }}>
+                <CardHeader
+                    title={title}
+                    action={<>
+                        {onClose ? (
+                            <IconButton onClick={onClose}>
+                                <CloseIcon />
+                            </IconButton>
+                        ) : null}
+                    </>}
+                    ></CardHeader>
                 <CardContent>
                     <Typography>Loading chart data...</Typography>
                 </CardContent>
@@ -167,3 +178,17 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
         </Card>
     );
 }
+
+ChartCard.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    selectedSources: PropTypes.arrayOf(PropTypes.string).isRequired,
+    chartData: PropTypes.object,
+    size: PropTypes.number.isRequired,
+    onClose: PropTypes.func,
+    onResize: PropTypes.func,
+    onMoveUp: PropTypes.func,
+    onMoveDown: PropTypes.func,
+    editMode: PropTypes.bool,
+    availableSources: PropTypes.arrayOf(PropTypes.string),
+};

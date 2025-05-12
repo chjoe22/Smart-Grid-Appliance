@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Box } from '@mui/material';
-import ChartCard from '../components/chart/ChartCard';
+import { Typography, Box } from '@mui/material';
 import chartStorage from '../components/chart/chartStorage.js';
 import ChartGrid from "../components/chart/ChartGrid.jsx";
 
@@ -34,7 +33,6 @@ const MainPage = () => {
 
                 <ChartGrid
                     charts={charts}
-                    onRemove={null}
                     onResize={handleResizeChart}
                     onMoveUp={handleMoveChartUp}
                     onMoveDown={handleMoveChartDown}

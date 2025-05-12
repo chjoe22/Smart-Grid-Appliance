@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import ChartCard from './ChartCard';
 
-const ChartGrid = ({ charts, onRemove, onResize, onMoveUp, onMoveDown }) => {
+export default function ChartGrid ({ charts, onRemove, onResize, onMoveUp, onMoveDown, editMode, availableSources }) {
     return (
         <Box
             sx={{
@@ -35,6 +36,8 @@ const ChartGrid = ({ charts, onRemove, onResize, onMoveUp, onMoveDown }) => {
                         onResize={onResize}
                         onMoveUp={onMoveUp}
                         onMoveDown={onMoveDown}
+                        editMode={editMode}
+                        availableSources={availableSources}
                     />
                 </Box>
             ))}
@@ -43,4 +46,20 @@ const ChartGrid = ({ charts, onRemove, onResize, onMoveUp, onMoveDown }) => {
     );
 };
 
-export default ChartGrid;
+ChartGrid.propTypes = {
+    charts: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            selectedSources: PropTypes.arrayOf(PropTypes.string).isRequired,
+            chartData: PropTypes.object,
+            size: PropTypes.number.isRequired,
+        })
+    ).isRequired,
+    onRemove: PropTypes.func,
+    onResize: PropTypes.func,
+    onMoveUp: PropTypes.func,
+    onMoveDown: PropTypes.func,
+    editMode: PropTypes.bool,
+    availableSources: PropTypes.arrayOf(PropTypes.string),
+};

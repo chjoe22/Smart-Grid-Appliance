@@ -65,5 +65,21 @@ export default class chartStorageManager {
         return charts;
     }
 
+    static clearCharts() {
+        localStorage.removeItem(chartStorageManager.sKey);
+    }
+
+    static updateChartData(id, selectedSources, chartData) {
+        const charts = chartStorageManager.loadCharts();
+        const updatedCharts = charts.map(chart => {
+            if (chart.id === id) {
+                return { ...chart, selectedSources, chartData };
+            }
+            return chart;
+        });
+        chartStorageManager.saveCharts(updatedCharts);
+        return updatedCharts;
+
+    }
 
 }

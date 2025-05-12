@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Select, MenuItem, Typography, Button, Paper } from '@mui/material';
-import ChartCard from './ChartCard.jsx';
+import ChartCard from './chartCard.jsx';
 import { fetchChartData } from './chartDataManager.js';
 import chartStorageManager from './chartStorage.js'
 

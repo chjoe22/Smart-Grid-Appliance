@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Box } from '@mui/material';
 import chartStorage from '../components/chart/chartStorage.js';
-import ChartGrid from "../components/chart/ChartGrid.jsx";
+import ChartGrid from "../components/chart/chartGrid.jsx";
 
 
 const MainPage = () => {

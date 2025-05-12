@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.sga.auth.controller;
 
+import dk.sdu.mmmi.sga.auth.dto.UserDTO;
 import dk.sdu.mmmi.sga.auth.entity.User;
 import dk.sdu.mmmi.sga.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
@@ -39,10 +39,12 @@ public class UserController {
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-                return ResponseEntity.ok("Login successful");
+                UserDTO userDTO = new UserDTO(user.getEmail(), user.getUsername());
+                return ResponseEntity.ok(userDTO);
             }
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
+
 }

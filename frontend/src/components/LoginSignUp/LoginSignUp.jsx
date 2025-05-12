@@ -5,6 +5,7 @@ import './LoginSignUp.css';
 import user_icon from '../Assets/person.png';
 import email_icon from '../Assets/email.png';
 import password_icon from '../Assets/password.png';
+import { useAuth } from "../authContext/AuthContext.jsx";
 
 const LoginSignUp = () => {
     const [isLogin, setIsLogin] = useState(false);
@@ -18,7 +19,7 @@ const LoginSignUp = () => {
 
     const handleRegister = async () => {
         const payload = {
-            username: email,
+            name,
             email,
             password
         };
@@ -45,22 +46,22 @@ const LoginSignUp = () => {
         }
     };
 
+    const { login } = useAuth();
+
     const handleLogin = async () => {
-        const payload = {
-            email,
-            password
-        };
+        const payload = { email, password };
 
         try {
             const response = await fetch("http://localhost:8080/api/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
             });
 
-            const data = await response.text();
+            const data = await response.json();
 
             if (response.ok) {
+                login(data); // <-- update auth context
                 setMessage("Login successful!");
                 setTimeout(() => navigate("/"), 1000);
             } else {

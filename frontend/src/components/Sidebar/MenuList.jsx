@@ -1,8 +1,20 @@
-import {Menu} from "antd";
-import {HomeOutlined, AppstoreOutlined, AreaChartOutlined, PayCircleOutlined, SettingOutlined, BarsOutlined} from '@ant-design/icons'
-import { Link } from "react-router-dom";
+import { Menu } from "antd";
+import {
+    HomeOutlined,
+    AppstoreOutlined,
+    AreaChartOutlined,
+    PayCircleOutlined,
+    SettingOutlined,
+    BarsOutlined,
+    LogoutOutlined
+} from '@ant-design/icons';
+import { Link, useNavigate } from "react-router-dom";
+import {useAuth} from "../authContext/AuthContext.jsx";
 
 const MenuList = ({ darkTheme }) => {
+    const navigate = useNavigate();
+    const { logout } = useAuth();
+
     return (
         <Menu
             theme={darkTheme ? 'dark' : 'light'}
@@ -31,14 +43,21 @@ const MenuList = ({ darkTheme }) => {
                     </Menu.Item>
                 </Menu.SubMenu>
             </Menu.SubMenu>
-            <Menu.Item key="Data" icon={<AreaChartOutlined />}>
+            <Menu.Item key="data" icon={<AreaChartOutlined />}>
                 <Link to="/data">Data</Link>
             </Menu.Item>
-            <Menu.Item key="Edit" icon={<PayCircleOutlined />}>
+            <Menu.Item key="edit" icon={<PayCircleOutlined />}>
                 <Link to="/edit">Edit</Link>
             </Menu.Item>
             <Menu.Item key="setting" icon={<SettingOutlined />}>
                 <Link to="/setting">Setting</Link>
+            </Menu.Item>
+
+            <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={() => {
+                logout();
+                navigate("/");
+            }}>
+                Logout
             </Menu.Item>
         </Menu>
     );

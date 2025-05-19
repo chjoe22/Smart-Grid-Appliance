@@ -8,7 +8,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
-import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart } from '@mui/x-charts';
 import { getSpecificAPIData } from '../api/specificAPI.js';
 import chartStorageManager from './chartStorage.js';
 
@@ -172,6 +172,7 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
                             series={series}
                             grid={{ vertical: true, horizontal: true }}
                         />
+
                     </Box>
                 </Collapse>
             </CardContent>

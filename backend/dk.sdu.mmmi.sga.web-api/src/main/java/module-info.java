@@ -16,4 +16,5 @@ module web {
     opens dk.sdu.mmmi.sga.web to spring.core, spring.beans, spring.context;
     opens dk.sdu.mmmi.sga.web.controllers to spring.core, spring.beans, spring.context;
     opens dk.sdu.mmmi.sga.web.service to spring.core, spring.beans, spring.context;
+    opens dk.sdu.mmmi.sga.web.config to spring.core, spring.beans, spring.context;
 }

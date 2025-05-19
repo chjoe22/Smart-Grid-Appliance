@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Mon May 12 20:17:31 CEST 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0196-c5b7-5f07-0000018295c0 
-on database directory /Users/MadsSigsgaard/Downloads/GreenhouseDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1b604f19 
-Loaded from file:/Users/MadsSigsgaard/.m2/repository/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
-java.vendor=Eclipse Adoptium
-java.runtime.version=22.0.2+9
-user.dir=/Users/MadsSigsgaard/IdeaProjects/Smart-Grid-Appliance
-os.name=Mac OS X
-os.arch=aarch64
-os.version=15.4.1
+Sun May 18 22:50:32 UTC 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0196-e597-7b19-000006a01168 
+on database directory C:\Users\Vandp\Desktop\Universitet\GreenhouseDB with class loader com.intellij.database.remote.jdbc.impl.JdbcClassLoader$JdbcClassLoaderImpl@3ac3fd8b 
+Loaded from file:/C:/Users/Vandp/AppData/Roaming/JetBrains/IntelliJIdea2024.3/jdbc-drivers/Apache%20Derby/10.17.1.0/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+java.vendor=JetBrains s.r.o.
+java.runtime.version=21.0.5+8-b631.28
+user.dir=D:\Github\Smart-Grid-Appliance
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

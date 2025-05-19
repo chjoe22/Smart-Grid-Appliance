@@ -12,9 +12,8 @@ public abstract class DatabaseConnection {
 
     protected DatabaseConnection(){
         try {
-            String url = "jdbc:derby:/Users/MadsSigsgaard/Downloads/GreenhouseDB;create=false";
-            //String url = "jdbc:derby:C:/Users/Vandp/Desktop/Universitet/GreenhouseDB;create=false";
-            //String url = "jdbc:derby://localhost:1527/GreenhouseDB;create=false";
+
+            String url = "jdbc:derby://localhost:1527/GreenhouseDB;create=false";
             this.connection = java.sql.DriverManager.getConnection(url, "user1", "user1");
         } catch (Exception e) {
             throw new RuntimeException("Failed to connect to the database", e);

@@ -2,13 +2,14 @@ import dk.sdu.mmmi.sga.core.services.DataCollection;
 import dk.sdu.mmmi.sga.database.usecase.*;
 
 module dk.sdu.mmmi.sga.greenhouseDB {
-    requires java.sql;
     requires dk.sdu.mmmi.sga.core;
     requires spring.context;
     requires static lombok;
     requires spring.web;
     requires spring.beans;
     requires spring.core;
+    requires commonDB;
+    requires java.sql;
 
     exports dk.sdu.mmmi.sga.database.usecase;
     exports dk.sdu.mmmi.sga.database.entity;
@@ -18,4 +19,5 @@ module dk.sdu.mmmi.sga.greenhouseDB {
 
     provides DataCollection with AirTempCollector, HumidityCollector, OutDoorLightCollector, OutDoorTempCollector, CO2Collector, MaxOutDoorLightCollector;
     opens dk.sdu.mmmi.sga.database.usecase to spring.core, spring.beans, spring.context;
+    opens dk.sdu.mmmi.sga.database.config to spring.core, spring.beans, spring.context;
 }

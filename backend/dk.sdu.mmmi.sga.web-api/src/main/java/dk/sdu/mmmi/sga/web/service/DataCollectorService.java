@@ -8,8 +8,6 @@ import jakarta.annotation.PostConstruct;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class DataCollectorService {
     private final List<DataCollection<?>> dataCollectionList;
@@ -26,7 +24,6 @@ public class DataCollectorService {
     @Scheduled(fixedRate = 10000)
     public void refreshData(){
         System.out.println("Refreshing data...");
-        //runCollectors();
         runAllCollectors();
     }
 

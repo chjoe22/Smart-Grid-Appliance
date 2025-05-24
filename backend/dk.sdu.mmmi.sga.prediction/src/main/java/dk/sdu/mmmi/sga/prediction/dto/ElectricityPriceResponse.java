@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ElectricityPriceResponse {
-    private LocalDateTime time;
+    private LocalDateTime timestamp;
     private double predictionPrice;
 }

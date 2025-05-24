@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class ElectricityPriceMapper {
      public ElectricityPriceResponse toResponse(ElectricityPrice entity) {
          return new ElectricityPriceResponse(
-                 entity.time(),
+                 entity.timestamp(),
                  entity.price()
          );
      }

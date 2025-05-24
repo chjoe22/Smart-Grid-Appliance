@@ -26,7 +26,7 @@ public class AirTempCollector extends DBConn implements DataCollection<AirTemper
     @SneakyThrows
     @Override
     public List<AirTemperature> collect() {
-        return incrementQueryExecution("AIR_TEMPERATURE", 100, rs -> {
+        return incrementQueryExecution("AIR_TEMPERATURE", 250, rs -> {
             List<AirTemperature> results = new ArrayList<>();
             while (rs.next()) {
                 AirTemperature airTemp = new AirTemperature(

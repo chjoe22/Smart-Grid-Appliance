@@ -29,6 +29,7 @@ export default function EditChartCard({ chart, availableSources, onUpdate }){
                     chartData={chart.chartData}
                     size={2}
                     editMode={false}
+                    showPredictions={showPredictions}
                 />
             </Box>
             <Box sx={{ flex: 1, pl: 2, display: 'flex', flexDirection: 'column' }}>

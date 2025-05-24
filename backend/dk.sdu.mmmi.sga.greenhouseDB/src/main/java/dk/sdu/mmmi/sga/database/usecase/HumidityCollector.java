@@ -26,7 +26,7 @@ public class HumidityCollector extends DBConn implements DataCollection<Humidity
     @SneakyThrows
     @Override
     public List<Humidity> collect() {
-        return incrementQueryExecution("HUMIDITY", 100, rs  -> {
+        return incrementQueryExecution("HUMIDITY", 250, rs  -> {
             List<Humidity> results = new ArrayList<>();
             while (rs.next()) {
                 Humidity humidity = new Humidity(

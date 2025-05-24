@@ -18,7 +18,7 @@ public class OutDoorTempCollector extends DBConn implements DataCollection<OutDo
 
     @Override
     public List<OutDoorTemperature> collect() {
-        return incrementQueryExecution("OUTDOOR_TEMPERATURE", 100, rs -> {
+        return incrementQueryExecution("OUTDOOR_TEMPERATURE", 250, rs -> {
             List<OutDoorTemperature> results = new ArrayList<>();
             while (rs.next()) {
                 OutDoorTemperature outDoorTemperature = new OutDoorTemperature(

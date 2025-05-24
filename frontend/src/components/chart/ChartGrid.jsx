@@ -38,6 +38,7 @@ export default function ChartGrid ({ charts, onRemove, onResize, onMoveUp, onMov
                         onMoveDown={onMoveDown}
                         editMode={editMode}
                         availableSources={availableSources}
+                        showPredictions={chart.showPredictions}
                     />
                 </Box>
             ))}

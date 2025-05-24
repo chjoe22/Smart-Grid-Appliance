@@ -9,7 +9,7 @@ import { useAuth } from "../authContext/AuthContext.jsx";
 
 const LoginSignUp = () => {
     const [isLogin, setIsLogin] = useState(false);
-    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
@@ -19,7 +19,7 @@ const LoginSignUp = () => {
 
     const handleRegister = async () => {
         const payload = {
-            name,
+            username,
             email,
             password
         };
@@ -35,6 +35,7 @@ const LoginSignUp = () => {
 
             if (response.ok) {
                 setMessage("Registration successful!");
+                setMessageType("success");
                 setMessageType("success");
             } else {
                 setMessage(`Error: ${data}`);
@@ -88,8 +89,8 @@ const LoginSignUp = () => {
                             <input
                                 type="text"
                                 placeholder="Enter Name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
                     )}

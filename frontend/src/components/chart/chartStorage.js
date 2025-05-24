@@ -26,7 +26,7 @@ export default class chartStorageManager {
         const chart = chartStorageManager.loadCharts();
         const updateChart = chart.map(chart => {
             if (chart.id === id) {
-                return { ...chart, chartData: newData };
+                return { ...chart, chartData: newData};
             }
             return chart;
         });

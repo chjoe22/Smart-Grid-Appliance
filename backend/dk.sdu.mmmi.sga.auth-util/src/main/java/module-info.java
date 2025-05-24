@@ -14,6 +14,7 @@ module authentication {
     requires spring.security.config;
     requires spring.security.web;
     requires spring.boot.autoconfigure;
+    requires spring.boot;
 
     exports dk.sdu.mmmi.sga.auth.repository;
     exports dk.sdu.mmmi.sga.auth.entity;

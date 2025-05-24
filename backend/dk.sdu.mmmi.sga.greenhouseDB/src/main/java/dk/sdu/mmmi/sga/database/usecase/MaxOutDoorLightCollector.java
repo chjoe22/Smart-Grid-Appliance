@@ -23,7 +23,7 @@ public class MaxOutDoorLightCollector extends DBConn implements DataCollection<M
      */
     @Override
     public List<MaxOutDoorLight> collect() {
-        return incrementQueryExecution("MAX_OUTDOOR_LIGHT", 100, rs -> {
+        return incrementQueryExecution("MAX_OUTDOOR_LIGHT", 250, rs -> {
             List<MaxOutDoorLight> results = new ArrayList<>();
             while (rs.next()) {
                 MaxOutDoorLight maxOutDoorLight = new MaxOutDoorLight(

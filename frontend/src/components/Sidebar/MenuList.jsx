@@ -13,7 +13,7 @@ import {useAuth} from "../authContext/AuthContext.jsx";
 
 const MenuList = ({ darkTheme }) => {
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
 
     return (
         <Menu
@@ -24,9 +24,12 @@ const MenuList = ({ darkTheme }) => {
             <Menu.Item key="home" icon={<HomeOutlined />}>
                 <Link to="/">Home</Link>
             </Menu.Item>
+            {!user && (
             <Menu.Item key="login" icon={<AppstoreOutlined />}>
                 <Link to="/login">Login</Link>
             </Menu.Item>
+            )}
+
             <Menu.SubMenu key="subtasks" icon={<BarsOutlined />} title="Tasks">
                 <Menu.Item key="task-1">
                     <Link to="/task-1">Task 1</Link>
@@ -49,16 +52,21 @@ const MenuList = ({ darkTheme }) => {
             <Menu.Item key="edit" icon={<PayCircleOutlined />}>
                 <Link to="/edit">Edit</Link>
             </Menu.Item>
-            <Menu.Item key="setting" icon={<SettingOutlined />}>
-                <Link to="/setting">Setting</Link>
-            </Menu.Item>
+            {user && (
+                <Menu.Item key="users" icon={<SettingOutlined />}>
+                    <Link to="/users">Users</Link>
+                </Menu.Item>
+            )}
 
-            <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={() => {
-                logout();
-                navigate("/");
-            }}>
-                Logout
-            </Menu.Item>
+            {user && (
+                <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={() => {
+                    logout();
+                    navigate("/");
+                }}>
+                    Logout
+                </Menu.Item>
+                )}
+
         </Menu>
     );
 };

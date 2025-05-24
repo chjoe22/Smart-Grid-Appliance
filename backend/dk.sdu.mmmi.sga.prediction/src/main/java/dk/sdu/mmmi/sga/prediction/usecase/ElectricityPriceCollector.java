@@ -12,7 +12,7 @@ import java.util.List;
 public class ElectricityPriceCollector extends DBConn {
 
     public List<ElectricityPrice> collect() {
-        return timeQueryExecution("COMBINED_EL_PRICES", 1000, rs -> {
+        return timeQueryExecution("COMBINED_EL_PRICES", 250, rs -> {
             List<ElectricityPrice> results = new ArrayList<>();
             while (rs.next()) {
                 ElectricityPrice electricityPrice = new ElectricityPrice(

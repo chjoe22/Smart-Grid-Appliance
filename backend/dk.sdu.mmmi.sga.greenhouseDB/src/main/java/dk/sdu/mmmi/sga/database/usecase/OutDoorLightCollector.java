@@ -23,7 +23,7 @@ public class OutDoorLightCollector extends DBConn implements DataCollection<OutD
      */
     @Override
     public List<OutDoorLight> collect() {
-        return incrementQueryExecution("OUTDOOR_LIGHT", 100, rs -> {
+        return incrementQueryExecution("OUTDOOR_LIGHT", 250, rs -> {
             List<OutDoorLight> results = new ArrayList<>();
             while(rs.next()){
                 OutDoorLight outDoorLight = new OutDoorLight(

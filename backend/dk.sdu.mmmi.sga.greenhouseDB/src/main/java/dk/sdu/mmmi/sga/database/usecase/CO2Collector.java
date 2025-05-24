@@ -20,7 +20,7 @@ public class CO2Collector extends DBConn implements DataCollection<CO2> {
     @SneakyThrows
     @Override
     public List<CO2> collect() {
-        return incrementQueryExecution("CO2", 100, rs -> {
+        return incrementQueryExecution("CO2", 250, rs -> {
             List<CO2> results = new ArrayList<>();
             while (rs.next()){
                 CO2 co2 = new CO2(

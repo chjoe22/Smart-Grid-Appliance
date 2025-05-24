@@ -35,17 +35,17 @@ public class PredictElectricityPrice {
         return model.classifyInstance(newInstance);
     }
 
-    public List<ElectricityPriceResponse> predictNextHours(int steps) throws Exception {
+    public List<ElectricityPriceResponse> predictNextHours(int hours) throws Exception {
         List<ElectricityPrice> history = collector.collect();
         Instances dataset = wekaDataset.from(history);
 
         LinearRegression model = new LinearRegression();
         model.buildClassifier(dataset);
 
-        LocalDateTime lastTime = history.get(history.size() - 1).time();
+        LocalDateTime lastTime = history.get(history.size() - 1).timestamp();
         List<ElectricityPriceResponse> predictions = new ArrayList<>();
 
-        for (int i = 1; i <= steps; i++) {
+        for (int i = 1; i <= hours; i++) {
             LocalDateTime future = lastTime.plusHours(i);
 
             double[] input = new double[]{

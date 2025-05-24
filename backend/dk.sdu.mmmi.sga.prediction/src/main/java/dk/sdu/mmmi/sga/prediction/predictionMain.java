@@ -21,7 +21,7 @@ public class predictionMain {
 
             System.out.println("Predicted electricity price: " + prediction + " euro");
             for (int i = 0; i < predictions.toArray().length; i++) {
-                System.out.println("Predicted electricity price for " + predictions.get(i).getTime() + ": " + predictions.get(i).getPredictionPrice() + " euro");
+                System.out.println("Predicted electricity price for " + predictions.get(i).getTimestamp() + ": " + predictions.get(i).getPredictionPrice() + " euro");
             }
         } catch (Exception e) {
             e.printStackTrace();

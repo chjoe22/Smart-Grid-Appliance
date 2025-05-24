@@ -22,7 +22,7 @@ public class BuildWekaDataset {
         dataset.setClassIndex(4);
 
         for (ElectricityPrice price : prices) {
-            LocalDateTime date = price.time();
+            LocalDateTime date = price.timestamp();
             double hour = date.getHour();
             double dayOfWeek = date.getDayOfWeek().getValue();
             double month = date.getMonthValue();

@@ -34,7 +34,7 @@ public class WebConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable) //csrf -> csrf.disable()
+                .csrf(csrf -> csrf.disable()) // AbstractHttpConfigurer::disable
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/register", "/api/login", "/api/**", "api/prediction").permitAll()
                         .anyRequest().authenticated()

@@ -52,7 +52,7 @@ public abstract class DBConn {
      * @return ResultSet of the needed data from the database
      */
     protected <T> T timeQueryExecution(String table, int limit, ResultSetHandler<T> handler){
-        String query = "SELECT * FROM APP." + table + " ORDER BY TIME DESC FETCH FIRST " + limit + " ROWS ONLY";
+        String query = "SELECT * FROM APP." + table + " ORDER BY TIME ASC FETCH FIRST " + limit + " ROWS ONLY";
         try (Connection conn = getConn();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery())

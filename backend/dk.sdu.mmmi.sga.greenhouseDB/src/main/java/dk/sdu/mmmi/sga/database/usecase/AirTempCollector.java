@@ -2,30 +2,32 @@ package dk.sdu.mmmi.sga.database.usecase;
 
 import dk.sdu.mmmi.sga.database.entity.AirTemperature;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
-import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
+import dk.sdu.mmmi.sga.db.util.DBConn;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AirTempCollector extends DatabaseConnection implements DataCollection<AirTemperature> {
+public class AirTempCollector extends DBConn implements DataCollection<AirTemperature> {
 
-    public AirTempCollector() {
-        super();
-    }
 
     @Override
     public String getName() {
         return "Air Temperature";
     }
 
+    /**
+     * Collects air temperature data from the database.
+     *
+     * @return a list of AirTemperature objects containing the collected data
+     */
+    @SneakyThrows
     @Override
     public List<AirTemperature> collect() {
-        List<AirTemperature> results = new ArrayList<>();
-        try (ResultSet rs = queryExecution("AIR_TEMPERATURE")) {
+        return incrementQueryExecution("AIR_TEMPERATURE", 250, rs -> {
+            List<AirTemperature> results = new ArrayList<>();
             while (rs.next()) {
                 AirTemperature airTemp = new AirTemperature(
                         rs.getInt("ID"),
@@ -35,9 +37,7 @@ public class AirTempCollector extends DatabaseConnection implements DataCollecti
                 );
                 results.add(airTemp);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return results;
+            return results;
+        });
     }
 }

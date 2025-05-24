@@ -12,7 +12,9 @@
         <module>backend/dk.sdu.mmmi.sga.web-api</module>
         <module>backend/dk.sdu.mmmi.sga.greenhouseDB</module>
         <module>backend/dk.sdu.mmmi.sga.core</module>
-        <module>backend/authentication-Util</module>
+        <module>backend/dk.sdu.mmmi.sga.auth-util</module>
+        <module>backend/dk.sdu.mmmi.sga.common-db</module>
+        <module>backend/dk.sdu.mmmi.sga.prediction</module>
     </modules>
 
     <properties>

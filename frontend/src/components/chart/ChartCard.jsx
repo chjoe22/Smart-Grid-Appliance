@@ -8,11 +8,12 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
-import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart } from '@mui/x-charts';
 import { getSpecificAPIData } from '../api/specificAPI.js';
 import chartStorageManager from './chartStorage.js';
+import {getPredictionData} from "../api/getPredictionAPI.js";
 
-export default function ChartCard({ id, title, selectedSources, chartData, size, onClose, onResize, onMoveUp, onMoveDown}) {
+export default function ChartCard({ id, title, selectedSources, chartData, size, onClose, onResize, onMoveUp, onMoveDown, showPredictions}) {
     const [rawData, setRawData] = useState( chartData || {});
     const [lastUpdated, setLastUpdated] = useState(null);
     const [expanded, setExpanded] = useState(true);
@@ -31,10 +32,23 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
                 console.error(`Failed to fetch ${source}`, error);
             }
         }
+
+        if (showPredictions) {
+            try {
+                const prediction = await getPredictionData("el/next");
+                newData["Energy Price Prediction"] = prediction.map(item => ({
+                    timestamp: item.timestamp,
+                    prediction: item.predictionPrice,
+                }));
+            } catch (error) {
+                console.error(`Failed to fetch prediction data`, error);
+            }
+        }
+
         setRawData(newData);
         setLastUpdated(new Date().toLocaleTimeString());
         chartStorageManager.updateChart(id, newData)
-    }, [selectedSources, id]);
+    }, [selectedSources, id, showPredictions]);
 
     useEffect(() => {
         if (chartData && Object.keys(chartData).length > 0) {
@@ -48,6 +62,10 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
 
         return () => clearInterval(intervalId);
     }, [chartData, fetchChartData]);
+
+    console.log("rawData keys:", Object.keys(rawData));
+    console.log("Prediction sample:", rawData["Prediction"]?.[0]);
+
 
     if (Object.keys(rawData).length === 0) {
         return (
@@ -91,7 +109,7 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
             const record = records.find(r => r.timestamp === timestamp);
 
             if (record) {
-                const valueField = Object.keys(record).find(
+                let valueField = Object.keys(record).find(
                     key => !['id', 'context_id', 'timestamp'].includes(key) && typeof record[key] === 'number'
                 );
                 if (valueField) {
@@ -109,6 +127,7 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
         yAxisKey: index < 2 ? 'left' : 'right',
         showMark: false,
     }));
+
 
     return (
         <Card sx={{
@@ -167,11 +186,12 @@ export default function ChartCard({ id, title, selectedSources, chartData, size,
                     }}>
                         <LineChart
                             sx={{ width: '100%', minWidth: '100%',  height: 300 }}
-                            xAxis={[{ scaleType: 'point', data: xLabels }]}
+                            xAxis={[{ scaleType: 'point', data: xLabels, dataKey: 'timestamp' }]}
                             yAxis={[{ id: 'left' }, { id: 'right' }]}
                             series={series}
                             grid={{ vertical: true, horizontal: true }}
                         />
+
                     </Box>
                 </Collapse>
             </CardContent>
@@ -191,4 +211,5 @@ ChartCard.propTypes = {
     onMoveDown: PropTypes.func,
     editMode: PropTypes.bool,
     availableSources: PropTypes.arrayOf(PropTypes.string),
+    showPredictions: PropTypes.bool,
 };

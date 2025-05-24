@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
-import ChartCard from './ChartCard';
+import ChartCard from './chartCard.jsx';
 
 export default function ChartGrid ({ charts, onRemove, onResize, onMoveUp, onMoveDown, editMode, availableSources }) {
     return (
@@ -38,6 +38,7 @@ export default function ChartGrid ({ charts, onRemove, onResize, onMoveUp, onMov
                         onMoveDown={onMoveDown}
                         editMode={editMode}
                         availableSources={availableSources}
+                        showPredictions={chart.showPredictions}
                     />
                 </Box>
             ))}

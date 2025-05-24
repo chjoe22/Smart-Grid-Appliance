@@ -2,42 +2,39 @@ package dk.sdu.mmmi.sga.database.usecase;
 
 import dk.sdu.mmmi.sga.database.entity.OutDoorLight;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
-import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
+import dk.sdu.mmmi.sga.db.util.DBConn;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class OutDoorLightCollector extends DatabaseConnection implements DataCollection<OutDoorLight> {
-
-    public OutDoorLightCollector() {
-        super();
-    }
+public class OutDoorLightCollector extends DBConn implements DataCollection<OutDoorLight> {
 
     @Override
     public String getName() {
         return "OutDoor Light";
     }
 
+    /**
+     * Collects outdoor light data from the database.
+     *
+     * @return a list of OutDoorLight objects containing the collected data
+     */
     @Override
     public List<OutDoorLight> collect() {
-        List<OutDoorLight> results = new ArrayList<>();
-        try (ResultSet rs = queryExecution("OUTDOOR_LIGHT")){
+        return incrementQueryExecution("OUTDOOR_LIGHT", 250, rs -> {
+            List<OutDoorLight> results = new ArrayList<>();
             while(rs.next()){
-                OutDoorLight outDoorLightDTO = new OutDoorLight(
+                OutDoorLight outDoorLight = new OutDoorLight(
                         rs.getInt("ID"),
                         rs.getInt("CONTEXT_ID"),
                         rs.getTimestamp("TIME"),
                         rs.getDouble("WATTM2")
                 );
-                results.add(outDoorLightDTO);
+                results.add(outDoorLight);
             }
-        }catch (SQLException sqlE){
-            sqlE.printStackTrace();
-        }
-        return results;
+            return results;
+        });
     }
 }

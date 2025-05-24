@@ -26,7 +26,7 @@ export default class chartStorageManager {
         const chart = chartStorageManager.loadCharts();
         const updateChart = chart.map(chart => {
             if (chart.id === id) {
-                return { ...chart, chartData: newData };
+                return { ...chart, chartData: newData};
             }
             return chart;
         });
@@ -69,11 +69,11 @@ export default class chartStorageManager {
         localStorage.removeItem(chartStorageManager.sKey);
     }
 
-    static updateChartData(id, selectedSources, chartData) {
+    static updateChartData(id, selectedSources, chartData, showPredictions) {
         const charts = chartStorageManager.loadCharts();
         const updatedCharts = charts.map(chart => {
             if (chart.id === id) {
-                return { ...chart, selectedSources, chartData };
+                return { ...chart, selectedSources, chartData, showPredictions: !!showPredictions };
             }
             return chart;
         });

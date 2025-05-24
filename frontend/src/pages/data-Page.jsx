@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Button, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import { getAPIData } from '../components/api/api.js';
 import chartStorage from '../components/chart/chartStorage.js';
-import ChartGrid from '../components/chart/ChartGrid.jsx';
+import ChartGrid from '../components/chart/chartGrid.jsx';
 import {fetchChartData} from "../components/chart/chartDataManager.js";
 
 

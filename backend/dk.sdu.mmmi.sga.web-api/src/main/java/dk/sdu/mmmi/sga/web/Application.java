@@ -9,16 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
-@SpringBootApplication
-@EnableScheduling
-@ComponentScan(basePackages = {
-        "dk.sdu.mmmi.sga.core",
-        "dk.sdu.mmmi.sga.web",
-        "dk.sdu.mmmi.sga.database",
-        "dk.sdu.mmmi.sga.auth"
-})
-@EnableJpaRepositories(basePackages = "dk.sdu.mmmi.sga.auth.repository")
-@EntityScan(basePackages = "dk.sdu.mmmi.sga.auth.entity")
+@SpringBootApplication(scanBasePackages = "dk.sdu.mmmi.sga")
 public class Application {
 
     // use ./mvnw spring-boot:run to run the spring application

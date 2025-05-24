@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Select, MenuItem, Typography, Button, Paper } from '@mui/material';
-import ChartCard from './ChartCard.jsx';
+import { Box, Select, MenuItem, Typography, Button, Paper, FormControlLabel, Checkbox } from '@mui/material';
+import ChartCard from './chartCard.jsx';
 import { fetchChartData } from './chartDataManager.js';
 import chartStorageManager from './chartStorage.js'
 
 export default function EditChartCard({ chart, availableSources, onUpdate }){
     const [selectedSources, setSelectedSources] = useState(chart.selectedSources);
+    const [showPredictions, setShowPredictions] = useState(chart.showPredictions || false);
 
     useEffect(() => {
         setSelectedSources(chart.selectedSources);
     }, [chart.selectedSources]);
 
     const handleSave = async () => {
-        const newChartData = await fetchChartData(selectedSources);
-        const updated = chartStorageManager.updateChartData(chart.id, selectedSources, newChartData);
+        const newChartData = await fetchChartData(selectedSources, showPredictions);
+        const updated = chartStorageManager.updateChartData(chart.id, selectedSources, newChartData, showPredictions);
         onUpdate(updated);
     };
 
@@ -28,6 +29,7 @@ export default function EditChartCard({ chart, availableSources, onUpdate }){
                     chartData={chart.chartData}
                     size={2}
                     editMode={false}
+                    showPredictions={showPredictions}
                 />
             </Box>
             <Box sx={{ flex: 1, pl: 2, display: 'flex', flexDirection: 'column' }}>
@@ -49,6 +51,16 @@ export default function EditChartCard({ chart, availableSources, onUpdate }){
                         </MenuItem>
                     ))}
                 </Select>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={showPredictions}
+                            onChange={(e) => setShowPredictions(e.target.checked)}
+                        />
+                    }
+                    label="Show Predictions"
+                />
+
                 <Button
                     variant="contained"
                     sx={{ mt: 2, alignSelf: 'flex-start' }}

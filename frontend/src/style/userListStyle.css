@@ -1,0 +1,50 @@
+.user-container {
+    background-color: #e6f0e6;
+    padding: 20px;
+    font-family: "Arial", sans-serif;
+    overflow-x: auto;
+}
+
+.user-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.user-header,
+.user-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 3fr;
+    padding: 12px 8px;
+    align-items: center;
+    text-align: left;
+    gap: 10px;
+    min-width: 600px;
+}
+
+.user-header {
+    background-color: #cddccf;
+    font-weight: bold;
+    border-bottom: 2px solid #aaa;
+}
+
+.user-row:nth-child(even) {
+    background-color: #d5e5d6;
+}
+
+.user-row:nth-child(odd) {
+    background-color: #9cbb99;
+    color: white;
+}
+
+.user-name {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}

@@ -2,19 +2,14 @@ package dk.sdu.mmmi.sga.database.usecase;
 
 import dk.sdu.mmmi.sga.database.entity.OutDoorTemperature;
 import dk.sdu.mmmi.sga.core.services.DataCollection;
-import dk.sdu.mmmi.sga.database.reader.DatabaseConnection;
+import dk.sdu.mmmi.sga.db.util.DBConn;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class OutDoorTempCollector extends DatabaseConnection implements DataCollection<OutDoorTemperature> {
-
-    public OutDoorTempCollector() {
-        super();
-    }
+public class OutDoorTempCollector extends DBConn implements DataCollection<OutDoorTemperature> {
 
     @Override
     public String getName() {
@@ -23,20 +18,18 @@ public class OutDoorTempCollector extends DatabaseConnection implements DataColl
 
     @Override
     public List<OutDoorTemperature> collect() {
-        List<OutDoorTemperature> results = new ArrayList<>();
-        try (ResultSet rs = queryExecution("OUTDOOR_TEMPERATURE")){
+        return incrementQueryExecution("OUTDOOR_TEMPERATURE", 250, rs -> {
+            List<OutDoorTemperature> results = new ArrayList<>();
             while (rs.next()) {
-                OutDoorTemperature outDoorTemperatureDTO = new OutDoorTemperature(
+                OutDoorTemperature outDoorTemperature = new OutDoorTemperature(
                         rs.getInt("ID"),
                         rs.getInt("CONTEXT_ID"),
                         rs.getTimestamp("TIME"),
                         rs.getDouble("CELCIUS")
                 );
-                results.add(outDoorTemperatureDTO);
+                results.add(outDoorTemperature);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return results;
+            return results;
+        });
     }
 }

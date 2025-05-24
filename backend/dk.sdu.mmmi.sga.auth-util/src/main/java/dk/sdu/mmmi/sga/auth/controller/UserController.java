@@ -32,11 +32,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
         }
 
-        System.out.println("Email: " + dto.getEmail());
-        System.out.println("Username: " + dto.getUsername());
-        System.out.println("Password: " + dto.getPassword());
-        System.out.println("Role: " + dto.getRole());
-
         User user = new User();
         user.setId(dto.getId());
         user.setEmail(dto.getEmail());

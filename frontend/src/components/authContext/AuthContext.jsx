@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import chartStorageManager from "../chart/chartStorage.js";
 
 const AuthContext = createContext();
 
@@ -6,6 +7,10 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        if (import.meta.env.DEV){
+            localStorage.removeItem("loggedInUser");
+        }
+
         const storedUser = localStorage.getItem("loggedInUser");
         if (storedUser) {
             setUser(JSON.parse(storedUser));
@@ -20,6 +25,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem("loggedInUser");
+        chartStorageManager.clearCharts();
     };
 
     return (

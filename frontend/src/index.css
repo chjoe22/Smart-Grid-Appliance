@@ -6,7 +6,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -29,6 +29,7 @@ body {
   min-height: 100vh;
   height: 100%;
   width: 100%;
+  background: inherit;
 }
 
 
@@ -69,7 +70,6 @@ button:focus-visible {
   }
 }
 
-/* Sidebar Configurations */
 .sidebar {
   color: #fff
 }
@@ -90,11 +90,10 @@ button:focus-visible {
   border-radius: 50%;
   background: rgba(28, 17, 41, 0.88);
 }
-.menu-bar{
-  height: 88vh;
-  margin-top: 2rem;
+.menu-bar {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 15px;
   font-size: 1rem;
   position: relative;

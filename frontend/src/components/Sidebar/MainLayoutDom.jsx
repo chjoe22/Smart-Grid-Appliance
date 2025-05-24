@@ -66,6 +66,7 @@ export default function MainLayoutDom() {
                     maxWidth: '100vw',
                     flex: 1,
                     overflowX: 'auto',
+                    background: 'linear-gradient(135deg, #e0f7fa, #ffffff)',
                     boxSizing: 'border-box'
                 }}>
                     <Outlet />

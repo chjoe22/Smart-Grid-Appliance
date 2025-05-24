@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import MainLayoutDom from "./components/Sidebar/MainLayoutDom.jsx";
-import LoginSignUp from "./components/LoginSignUp/LoginSignUp.jsx";
+import LoginSignupPage from "./pages/login-signup-page.jsx";
 import DataPage from "./pages/data-Page.jsx";
 import MainPage from "./pages/main-Page.jsx";
 import EditPage from "./pages/edit-Page.jsx";
@@ -22,7 +22,7 @@ function App() {
                         <DataPage/>
                     </PrivateRouting>}/>
 
-                    <Route path="login" element={<LoginSignUp/>}/>
+                    <Route path="login" element={<LoginSignupPage/>}/>
 
                     <Route path="edit" element={
                         <PrivateRouting>

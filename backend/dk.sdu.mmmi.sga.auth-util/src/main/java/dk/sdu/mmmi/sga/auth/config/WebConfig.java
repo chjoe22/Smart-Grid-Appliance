@@ -36,7 +36,7 @@ public class WebConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable()) // AbstractHttpConfigurer::disable
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/register", "/api/login", "/api/**", "api/prediction").permitAll()
+                        .requestMatchers("/api/register", "/api/login", "/api/**", "/api/prediction", "/metric/health", "/metric/uptime").permitAll()
                         .anyRequest().authenticated()
                 );
 

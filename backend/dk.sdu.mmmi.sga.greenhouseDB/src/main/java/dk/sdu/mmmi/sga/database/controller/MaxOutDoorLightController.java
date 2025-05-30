@@ -33,7 +33,7 @@ public class MaxOutDoorLightController {
     @GetMapping("/{id}")
     public MaxOutDoorLightResponse getMaxOutDoorLightById(@PathVariable int id) {
         return maxOutDoorLightCollector.collect().stream()
-                .filter(maxOutDoorLight -> maxOutDoorLight.id() == id)
+                .filter(maxOutDoorLight -> maxOutDoorLight.getId() == id)
                 .map(maxOutDoorLightMapper::toResponse)
                 .findFirst()
                 .orElse(null);

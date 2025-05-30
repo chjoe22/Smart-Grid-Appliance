@@ -9,7 +9,7 @@ module dk.sdu.mmmi.sga.greenhouseDB {
     requires spring.beans;
     requires spring.core;
     requires commonDB;
-    requires java.sql;
+    requires jakarta.persistence;
 
     exports dk.sdu.mmmi.sga.database.usecase;
     exports dk.sdu.mmmi.sga.database.entity;

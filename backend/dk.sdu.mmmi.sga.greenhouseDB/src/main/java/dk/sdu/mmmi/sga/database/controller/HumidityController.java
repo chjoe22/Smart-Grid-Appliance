@@ -34,7 +34,7 @@ public class HumidityController {
     @GetMapping("/{id}")
     public HumidityResponse getHumidityById(@PathVariable int id) {
         return humidityCollector.collect().stream()
-                .filter(humidity -> humidity.id() == id)
+                .filter(humidity -> humidity.getId() == id)
                 .map(humidityMapper::toResponse)
                 .findFirst()
                 .orElse(null);

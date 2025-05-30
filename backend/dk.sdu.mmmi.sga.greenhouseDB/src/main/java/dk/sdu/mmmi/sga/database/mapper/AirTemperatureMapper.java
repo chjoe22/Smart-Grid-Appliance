@@ -9,10 +9,10 @@ public class AirTemperatureMapper {
 
     public AirTemperatureResponse toResponse(AirTemperature entity) {
         return new AirTemperatureResponse(
-                entity.id(),
-                entity.context_id(),
-                entity.timestamp(),
-                entity.celcius()
+                entity.getId(),
+                entity.getContextId(),
+                entity.getTimestamp(),
+                entity.getCelcius()
         );
     }
 }

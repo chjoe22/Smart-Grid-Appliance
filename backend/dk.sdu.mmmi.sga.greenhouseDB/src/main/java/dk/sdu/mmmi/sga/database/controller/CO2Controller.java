@@ -33,7 +33,7 @@ public class CO2Controller {
     @GetMapping("/{id}")
     public CO2Response getCO2ById(@PathVariable int id) {
         return co2Collector.collect().stream()
-                .filter(co2 -> co2.id() == id)
+                .filter(co2 -> co2.getId() == id)
                 .map(co2Mapper::toResponse)
                 .findFirst()
                 .orElse(null);

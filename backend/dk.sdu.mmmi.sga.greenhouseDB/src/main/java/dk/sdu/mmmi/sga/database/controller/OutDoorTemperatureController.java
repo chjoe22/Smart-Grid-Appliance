@@ -32,7 +32,7 @@ public class OutDoorTemperatureController {
     @GetMapping("/{id}")
     public OutDoorTemperatureResponse getOutDoorTemperatureById(@PathVariable int id) {
         return outDoorTempCollector.collect().stream()
-                .filter(outDoorTemperature -> outDoorTemperature.id() == id)
+                .filter(outDoorTemperature -> outDoorTemperature.getId() == id)
                 .map(outDoorTemperatureMapper::toResponse)
                 .findFirst()
                 .orElse(null);

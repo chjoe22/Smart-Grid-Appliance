@@ -29,23 +29,6 @@ const MenuList = ({ darkTheme }) => {
                 <Link to="/login">Login</Link>
             </Menu.Item>
             )}
-
-            <Menu.SubMenu key="subtasks" icon={<BarsOutlined />} title="Tasks">
-                <Menu.Item key="task-1">
-                    <Link to="/task-1">Task 1</Link>
-                </Menu.Item>
-                <Menu.Item key="task-2">
-                    <Link to="/task-2">Task 2</Link>
-                </Menu.Item>
-                <Menu.SubMenu key="subtaskMenu" title="SubtaskMenu">
-                    <Menu.Item key="SubtaskMenu-1">
-                        <Link to="/subtask-1">SubtaskMenu 1</Link>
-                    </Menu.Item>
-                    <Menu.Item key="SubtaskMenu-2">
-                        <Link to="/subtask-2">SubtaskMenu 2</Link>
-                    </Menu.Item>
-                </Menu.SubMenu>
-            </Menu.SubMenu>
             <Menu.Item key="data" icon={<AreaChartOutlined />}>
                 <Link to="/data">Data</Link>
             </Menu.Item>

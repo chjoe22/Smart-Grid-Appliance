@@ -2,8 +2,6 @@ package dk.sdu.mmmi.sga.database.entity;
 
 
 import dk.sdu.mmmi.sga.core.entity.Sensor;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.*;
 
 import java.sql.Timestamp;

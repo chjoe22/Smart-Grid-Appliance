@@ -8,6 +8,8 @@ module web {
     requires spring.core;
     requires spring.beans;
     requires spring.data.jpa;
+    requires micrometer.core;
+    requires spring.boot.actuator;
 
     exports dk.sdu.mmmi.sga.web.controllers;
     exports dk.sdu.mmmi.sga.web.service;

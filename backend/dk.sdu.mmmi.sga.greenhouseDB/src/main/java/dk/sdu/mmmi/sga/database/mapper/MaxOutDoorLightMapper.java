@@ -9,10 +9,10 @@ public class MaxOutDoorLightMapper {
 
     public MaxOutDoorLightResponse toResponse(MaxOutDoorLight entity) {
         return new MaxOutDoorLightResponse(
-                entity.id(),
-                entity.context_id(),
-                entity.timestamp(),
-                entity.wattm2()
+                entity.getId(),
+                entity.getContextId(),
+                entity.getTimestamp(),
+                entity.getWattm2()
         );
     }
 }

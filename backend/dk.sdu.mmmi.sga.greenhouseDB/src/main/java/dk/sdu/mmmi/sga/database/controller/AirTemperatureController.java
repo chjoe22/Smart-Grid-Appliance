@@ -33,7 +33,7 @@ public class AirTemperatureController {
     @GetMapping("/{id}")
     public AirTemperatureResponse getAirTemperatureById(@PathVariable int id) {
         return airTempCollector.collect().stream()
-                .filter(airTemperature -> airTemperature.id() == id)
+                .filter(airTemperature -> airTemperature.getId() == id)
                 .map(airTemperatureMapper::toResponse)
                 .findFirst()
                 .orElse(null);

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class OutDoorLightMapper {
     public OutDoorLightResponse toResponse(OutDoorLight entity) {
         return new OutDoorLightResponse(
-                entity.id(),
-                entity.context_id(),
-                entity.timestamp(),
-                entity.wattm2()
+                entity.getId(),
+                entity.getContextId(),
+                entity.getTimestamp(),
+                entity.getWattm2()
         );
     }
 }

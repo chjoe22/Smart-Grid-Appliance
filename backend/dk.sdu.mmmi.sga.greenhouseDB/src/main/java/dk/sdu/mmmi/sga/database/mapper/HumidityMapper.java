@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class HumidityMapper {
     public HumidityResponse toResponse(Humidity entity) {
         return new HumidityResponse(
-                entity.id(),
-                entity.context_id(),
-                entity.timestamp(),
-                entity.humidity()
+                entity.getId(),
+                entity.getContextId(),
+                entity.getTimestamp(),
+                entity.getHumidity()
         );
     }
 }

@@ -34,7 +34,7 @@ public class OutDoorLightController {
     @GetMapping("/{id}")
     public OutDoorLightResponse getOutDoorLightById(@PathVariable int id) {
         return outDoorLightCollector.collect().stream()
-                .filter(outDoorLight -> outDoorLight.id() == id)
+                .filter(outDoorLight -> outDoorLight.getId() == id)
                 .map(outDoorLightMapper::toResponse)
                 .findFirst()
                 .orElse(null);

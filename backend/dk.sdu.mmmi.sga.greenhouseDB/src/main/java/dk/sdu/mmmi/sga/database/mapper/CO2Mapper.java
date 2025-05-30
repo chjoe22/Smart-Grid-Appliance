@@ -9,10 +9,10 @@ public class CO2Mapper {
 
     public CO2Response toResponse(CO2 entity) {
         return new CO2Response(
-                entity.id(),
-                entity.context_id(),
-                entity.timestamp(),
-                entity.ppm()
+                entity.getId(),
+                entity.getContextId(),
+                entity.getTimestamp(),
+                entity.getPpm()
         );
     }
 }
